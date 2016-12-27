@@ -1,7 +1,7 @@
 module['exports'] = function myService (hook) {
   var text = '';
 if(hook.params.version == "VyOS") {
-  text = "Security Alert - INFO: " + " Hostname:" + hook.params.hostname + " Version:" + hook.params.version + " violates security policy. Opening Connectwise Ticket.";
+  text = "Security Alert - INFO: " + " IP:" + hook.params.ip + " Hostname:" + hook.params.hostname + " Version:" + hook.params.version + " violates security policy. Opening Connectwise Ticket.";
   // Whoa this is really serious. We have strict rules about this kind of thing.
   // Call Tropo IVR to call too..
 }
