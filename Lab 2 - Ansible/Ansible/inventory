@@ -1,0 +1,6 @@
+[AWS-Routers]
+35.166.172.203
+
+[AWS-Routers:vars]
+username="codecamp"
+password="bettertogether"
