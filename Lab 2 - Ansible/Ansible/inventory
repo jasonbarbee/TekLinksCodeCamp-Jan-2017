@@ -7,6 +7,5 @@ password="bettertogether"
 
 [all:vars]
 hookname="jasonbarbee"
-bottoken="yourtoken"
+bottoken="NGU0OTg2MDctMjg4MC00ZTZiLTllM2UtMjNiYTU5OTJlMDA3NmNiYThiNjItZmNh"
 roomid="Y2lzY29zcGFyazovL3VzL1JPT00vYWI4NTk1YjAtY2M3NC0xMWU2LWJkMjUtZDU5Y2U3ZjUxOTE5"
-hookurl="https://hook.io/jasonbarbee/securitycheck"
