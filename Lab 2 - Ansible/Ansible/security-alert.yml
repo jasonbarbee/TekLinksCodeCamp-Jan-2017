@@ -1,3 +1,7 @@
 ---
     - name: Security Alert
       shell: echo "SECURITY ALERT!"
+    - name: Alert the NOC Team
+      uri:
+        url: https://hook.io/jasonbarbee/securitycheck?bottoken=NGU0OTg2MDctMjg4MC00ZTZiLTllM2UtMjNiYTU5OTJlMDA3NmNiYThiNjItZmNh&hookname=jasonbarbee&version={{ result.ansible_facts.ansible_net_version }}&message="Alert-{{ result.ansible_facts.ansible_net_hostname }}"&roomid=Y2lzY29zcGFyazovL3VzL1JPT00vYWI4NTk1YjAtY2M3NC0xMWU2LWJkMjUtZDU5Y2U3ZjUxOTE5
+        method: GET

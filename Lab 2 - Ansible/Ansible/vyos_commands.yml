@@ -22,7 +22,7 @@
 
     - name: debug stuff
       debug:
-        var: result.ansible_facts.ansible_net_version
+        var: result.ansible_facts
 
     - include: security-alert.yml
       when: result.ansible_facts.ansible_net_version == "VyOS"

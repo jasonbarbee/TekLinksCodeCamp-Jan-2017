@@ -4,3 +4,9 @@
 [AWS-Routers:vars]
 username="codecamp"
 password="bettertogether"
+
+[all:vars]
+hookname="jasonbarbee"
+bottoken="yourtoken"
+roomid="Y2lzY29zcGFyazovL3VzL1JPT00vYWI4NTk1YjAtY2M3NC0xMWU2LWJkMjUtZDU5Y2U3ZjUxOTE5"
+hookurl="https://hook.io/jasonbarbee/securitycheck"

@@ -1,7 +1,7 @@
 module['exports'] = function myService (hook) {
   var text = '';
 if(hook.params.version == "VyOS") {
-  text = "Security Check Failed - Non Cisco device detected!";
+  text = "Security Alert - INFO: " + hook.params.message;
   // Whoa this is really serious. We have strict rules about this kind of thing.
   // Call Tropo IVR to call too..
 }
