@@ -29,7 +29,7 @@ request({
 });
 }
  else {
-    return hook.res.write("No Security issues found\n");
+    hook.res.write("No Security issues found\n");
  }
   
 //Log this to Spark  
@@ -53,6 +53,6 @@ request({
         hook.res.write("Spark Log Successful\n");
     }
 });
-hook.res.end();
+return hook.res.end();
    
 };
