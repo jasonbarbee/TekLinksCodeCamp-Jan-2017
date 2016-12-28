@@ -1,11 +1,12 @@
 ---
     - name: Security Alert
       shell: echo "SECURITY ALERT!"
+
     - name: Alert the NOC Team
       uri:
         url: "https://hook.io/{{ hookname }}/securitycheck"
-        method: GET
+        method: POST
         HEADER_Content-Type: application/json
-        body: '{ "bottoken": "{{ bottoken }}", "hookname":"{{ hookname }}", "ip" : "{{ inventory_hostname }}", "version" : "{{ result.ansible_facts.ansible_net_version }}, "hostanme" : "{{ result.ansible_facts.ansible_net_hostname}}", "roomid" : "{{ roomid }}" }'
+        body: '{ "bottoken" : "{{ bottoken }}", "hookname" : "{{ hookname }}", "ip" : "{{ inventory_hostname }}", "version" : "{{ result.ansible_facts.ansible_net_version }}", "hostname" : "{{ result.ansible_facts.ansible_net_hostname  }}", "roomid" : "{{ roomid }}" }'
         body_format: json
         validate_certs: no
