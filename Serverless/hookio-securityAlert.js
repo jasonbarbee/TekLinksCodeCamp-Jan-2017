@@ -27,11 +27,8 @@ troporequest({
         hook.res.write("Tropo Call Successful\n");
     }
 });
-}
- else {
-    hook.res.write("No Security issues found\n");
- }
-  
+
+
 //Log this to Spark  
 //Load the request module
 var sparkrequest = require('request');
@@ -53,6 +50,10 @@ sparkrequest({
         hook.res.write("Spark Log Successful\n");
     }
 });
-return hook.res.end();
-   
+
+}
+ else {
+    hook.res.write("No Security issues found\n");
+ }
+return hook.res.end(); 
 };
