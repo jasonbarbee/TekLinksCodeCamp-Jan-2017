@@ -1,6 +1,6 @@
 
 *.pem
-
+*.retry
 backup/**
 **config**
 Ansible/Ansible/backup/**
