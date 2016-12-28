@@ -1,4 +1,6 @@
 
 *.pem
 
-**backup/**
+backup/**
+**config**
+Ansible/Ansible/backup/**

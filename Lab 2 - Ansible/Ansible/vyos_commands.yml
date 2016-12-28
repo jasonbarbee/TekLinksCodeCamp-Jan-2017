@@ -25,7 +25,7 @@
         var: result.ansible_facts
 
     - include: security-alert.yml
-      when: result.ansible_facts.ansible_net_version == "VyOS"
+      when: result.ansible_facts.ansible_net_version == "VzOS"
 
     - name: Show version
       vyos_command:
