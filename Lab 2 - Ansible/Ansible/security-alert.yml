@@ -7,6 +7,6 @@
         url: "https://hook.io/{{ hookname }}/securitycheck"
         method: POST
         HEADER_Content-Type: application/json
-        body: '{ "bottoken" : "{{ bottoken }}", "hookname" : "{{ hookname }}", "ip" : "{{ inventory_hostname }}", "version" : "{{ result.ansible_facts.ansible_net_version }}", "hostname" : "{{ result.ansible_facts.ansible_net_hostname  }}", "roomid" : "{{ roomid }}" }'
+        body: '{ "bottoken" : "{{ bottoken }}", "hookname" : "{{ hookname }}", "ip" : "{{ inventory_hostname }}", "version" : "{{ result.ansible_facts.ansible_net_version }}", "hostname" : "{{ result.ansible_facts.ansible_net_hostname  }}", "roomid" : "{{ roomid }}", "numbertocall" : "{{ numbertocall }}", "customername" : "{{ customername }}"}'
         body_format: json
         validate_certs: no
