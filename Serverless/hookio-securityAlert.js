@@ -6,8 +6,8 @@ if(hook.params.version == "VyOS") {
   // Whoa this is really serious. We have strict rules about this kind of thing.
   // Call Tropo IVR to call too..
   https://api.tropo.com/1.0/sessions?action=create&token=754147586a6a6645646f664a77457378736f7364584d46786c4f44586870504d706c4543444764486277545a&numberToDial=2052495988&customerName=jeremy&msg=test
-var request = require('request');
-request({
+var troporequest = require('request');
+troporequest({
     url: 'https://api.tropo.com/1.0/sessions',
     qs: {
       action: "create",
@@ -34,8 +34,8 @@ request({
   
 //Log this to Spark  
 //Load the request module
-var request = require('request');
-request({
+var sparkrequest = require('request');
+sparkrequest({
     url: 'https://hook.io/' + hook.params.hookname + '/sparklogger', //URL to hit
     qs: {
       bottoken: hook.params.bottoken, 
