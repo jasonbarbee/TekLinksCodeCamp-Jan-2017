@@ -2,7 +2,9 @@
 Presenters Jason Barbee and Jeremy Sanders
 
 # Prep 
-* Downoad the repo by GIT or Zip file - top right button of this repo.
+* Download Vagrant and install - https://www.vagrantup.com/downloads.html
+* Download Virtualbox and install https://www.virtualbox.org/wiki/Downloads
+* Downoad the Code Camp repo by GIT or Zip file - top right button of this repo.
 * git clone https://github.com/jasonbarbee/TekLinksCodeCamp-Jan-2017 
 * Unzip and cd to the vagrant-code-camp folder
 * issue command ```vagrant up```. give it 10 minutes. when done ```vagrant ssh``` to get inside the VM. 
