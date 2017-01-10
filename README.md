@@ -4,9 +4,9 @@ Presenters Jason Barbee and Jeremy Sanders
 # Prep 
 * Downoad the repo by GIT or Zip file - top right button of this repo.
 * git clone https://github.com/jasonbarbee/TekLinksCodeCamp-Jan-2017 
-* cd to the vagrant folder
+* Unzip and cd to the vagrant-code-camp folder
 * issue command ```vagrant up```. give it 10 minutes. when done ```vagrant ssh``` to get inside the VM. 
-* Change to the lab directory - ```cd /vagrant/code-camp/Lab 2 - Ansible/Ansible``  
+* Change to the lab directory - ```cd /vagrant/Ansible`  
 * ```ansible-playbook -i inventory vyos_commands.xml``` and you should get ansible output from my test AWS router.
 
 Quick Reference Links
