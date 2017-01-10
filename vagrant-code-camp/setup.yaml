@@ -1,0 +1,58 @@
+---
+- hosts: all
+  gather_facts: False
+  tasks:
+  - name: Install packages required to run the examples
+    apt: pkg={{item}} state=installed
+    sudo: true
+    with_items:
+         - python
+         - python-pip
+         - git
+         - build-essential
+         - python-dev
+         - libffi-dev
+         - libxml2-dev
+         - libxslt1-dev
+         - lib32z1-dev
+         - libssl-dev
+
+  - name: install required python dependencies
+    sudo: true
+    pip: requirements=/vagrant/requirements.txt executable=pip
+
+    # Clean Repo 
+  - name: Clean NTC Repo
+    shell: rm -rf /usr/share/ansible/ntc-ansible
+    sudo: true
+
+    # Install NTC Repo      
+  - name: Clone NTC-Ansible
+    shell: git clone https://github.com/networktocode/ntc-ansible --recursive /usr/share/ansible/ntc-ansible
+    sudo: true
+
+    # Install software repo 
+  - name: Install Software Repo
+    shell: apt-get -y install software-properties-common
+    sudo: true
+
+    # Install Ansible Repo  
+  - name: Install Ansible Repo
+    shell: apt-add-repository -y ppa:ansible/ansible
+    sudo: true
+
+    # Update APT      
+  - name: Update APT
+    shell: apt-get update
+    sudo: true
+
+    # Install Ansible     
+  - name: Install Ansible
+    shell: apt-get -y install ansible
+    sudo: true
+
+
+    # Clone Ansible Templater Repo      
+  - name: Clone Ansible Templater
+    shell: git clone https://github.com/jasonbarbee/ansible-cisco-templater /vagrant/ansible-templater
+    sudo: true

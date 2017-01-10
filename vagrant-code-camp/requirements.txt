@@ -1,0 +1,15 @@
+Jinja2
+MarkupSafe
+jtextfsm
+requests
+psutil
+python-slugify
+cerberus
+pandas
+ciscoconfparse
+netmiko
+lxml
+napalm
+ntc-ansible
+pyntc
+
