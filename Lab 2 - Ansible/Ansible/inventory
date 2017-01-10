@@ -1,0 +1,13 @@
+[AWS-Routers]
+35.166.172.203
+
+[AWS-Routers:vars]
+username="codecamp"
+password="bettertogether"
+
+[all:vars]
+hookname="jasonbarbee"
+bottoken="NGU0OTg2MDctMjg4MC00ZTZiLTllM2UtMjNiYTU5OTJlMDA3NmNiYThiNjItZmNh"
+roomid="Y2lzY29zcGFyazovL3VzL1JPT00vYWI4NTk1YjAtY2M3NC0xMWU2LWJkMjUtZDU5Y2U3ZjUxOTE5"
+numbertocall="2512095077"
+customername="JasonBarbee"

@@ -6,8 +6,6 @@ backup/**
 Ansible/Ansible/backup/**
 Ansible/Ansible/inventory
 
-Lab 2 - Ansible/Ansible/inventory
-
 vagrant-code-camp/.vagrant/machines/default/virtualbox/synced_folders
 
 vagrant-code-camp/.vagrant/machines/default/virtualbox/private_key
