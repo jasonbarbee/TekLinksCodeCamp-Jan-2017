@@ -51,7 +51,16 @@
     shell: apt-get -y install ansible
     sudo: true
 
-  # Clone Code Camp Repo      
-  - name: Clone Code Campe Repo
+    # Clone Code Camp Repo      
+  - name: Clone Code Camp Repo
     shell: git clone https://github.com/jasonbarbee/TekLinksCodeCamp-Jan-2017 /vagrant/code-camp
     sudo: true
+     
+  - name: Fix Ansible Config File Defaults
+    shell: cp /vagrant/code-camp/vagrant-code-camp/ansible.cfg /etc/ansible/ansible.cfg
+    sudo: true
+
+  - name: Fix missing ssh known host file - ansible crashed without it
+    shell: echo "" >> /home/vagrant/.ssh/known_hosts
+    sudo: true
+
