@@ -7,3 +7,17 @@ Ansible/Ansible/backup/**
 Ansible/Ansible/inventory
 
 Lab 2 - Ansible/Ansible/inventory
+
+vagrant-code-camp/.vagrant/machines/default/virtualbox/synced_folders
+
+vagrant-code-camp/.vagrant/machines/default/virtualbox/private_key
+
+vagrant-code-camp/.vagrant/machines/default/virtualbox/index_uuid
+
+vagrant-code-camp/.vagrant/machines/default/virtualbox/id
+
+vagrant-code-camp/.vagrant/machines/default/virtualbox/creator_uid
+
+vagrant-code-camp/.vagrant/machines/default/virtualbox/action_set_name
+
+vagrant-code-camp/.vagrant/machines/default/virtualbox/action_provision

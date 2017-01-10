@@ -51,8 +51,7 @@
     shell: apt-get -y install ansible
     sudo: true
 
-
-    # Clone Ansible Templater Repo      
-  - name: Clone Ansible Templater
-    shell: git clone https://github.com/jasonbarbee/ansible-cisco-templater /vagrant/ansible-templater
+  # Clone Code Camp Repo      
+  - name: Clone Code Campe Repo
+    shell: git clone https://github.com/jasonbarbee/TekLinksCodeCamp-Jan-2017 /vagrant/code-camp
     sudo: true
