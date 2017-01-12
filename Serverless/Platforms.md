@@ -32,18 +32,17 @@ Provision Time - days
 ![60%](images/vmware.png)
 
 VMWare Servers on physical hardware, SANs, Networking
-Provision Time - hour(s) 
-*if we had SAN space and the hardware
+Provision Time - ~ 1-2 hours
 
 ---
-# Compute in 2017 - Microservices
+# Compute in 2017 - Microservices and APIs
 ## FAAS / Function as a Service Providers.
 AWS, Google, Azure, Webtasks
 ## API Integration Providers
 IFTT, Zapier
 
 ---
-# IFTT.com - Simple Tasks
+# IFTT.com - Consumer Facing Automation
 
 ## Simple Action "Recipes"
 ![100%](images/recipe.jpeg) 
@@ -51,7 +50,7 @@ IFTT, Zapier
 ### Add custom actions with Maker Channel to any URL.
 
 ---
-# Zapier.com
+# Zapier.com - Business Logic Automattion
 ## More logic and customization of actions.
 ## Still End User Friendly. Free plan and up.
 # 750+ API integrations
@@ -82,16 +81,68 @@ Webtasks.io - Free/1 per second...
 hook.io - Free / 1000 requests per month
 
 ---
-# AWS Microservice Detail
+# AWS Components
+API Gateway
+* RESTFul API interface to run Lambda Code
+
+---
+# AWS Components
+Llambda
+Function as a Service to run small units of code on on requests or evenets
+* Read or Write to a database.
+* Call a Spark Log
+* call a payment processing and return a value.
+
+
+---
+# AWS Components
+### DynamoDB - managed NoSQL Database 
+### SQL
+```
+INSERT INTO book (
+  `ISBN`, `title`, `author`
+)
+VALUES (
+  '9780992461256', 
+  'Mastering Windows NT 4.0', 
+  'John Smith'
+);
+```
+### NoSQL
+```
+db.book.insert({
+  ISBN: "9780992461256",
+  title: "Full Stack JavaScript",
+  author: "Colin Ihrig & Adam Bretz"
+});
+```
+---
+# AWS Microservice Example
 ![100%](images/NetOps-chat.png)
 
 --- 
-# Lab - Hook.io
-Create account at www.hook.io
+# Anatomy of a web hook at hook.io
+Hello World
+```
+module['exports'] = function helloWorld (hook) {
+  hook.res.end(host + ' says, "Hello world!"');
+};
+```
 
 ---
-# Create Hook.io MicroService
+# Hello world at Webtask.io
+```
+module.exports = 
+	function (cb) {
+    	cb(null, 'Hello');
+    }
+```
 
-Code 
-github...
+---
+# Lab  4 - Simple Microservices @ Hook.io
+
+Create a Hook.io Account
+Make a function as a service process to call our Spark Logger.
+
+---
 

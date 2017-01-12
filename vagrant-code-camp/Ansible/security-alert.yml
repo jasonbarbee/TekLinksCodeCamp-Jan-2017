@@ -4,7 +4,7 @@
 
     - name: Alert the NOC Team
       uri:
-        url: "https://hook.io/{{ hookname }}/securitycheck"
+        url: "https://hook.io/{{ hookname }}/securityalert"
         method: POST
         HEADER_Content-Type: application/json
         body: '{ "bottoken" : "{{ bottoken }}", "hookname" : "{{ hookname }}", "ip" : "{{ inventory_hostname }}", "version" : "{{ result.ansible_facts.ansible_net_version }}", "hostname" : "{{ result.ansible_facts.ansible_net_hostname  }}", "roomid" : "{{ roomid }}", "numbertocall" : "{{ numbertocall }}", "customername" : "{{ customername }}"}'

@@ -58,6 +58,8 @@ Open a text editor, and build a new file - called get-facts.yml
       debug:
         var: result.ansible_facts
 ```
+The first task collects the data, the second task dumps the data variable.
+
 ---
 # Basic Ansible Fact Gathering
 
