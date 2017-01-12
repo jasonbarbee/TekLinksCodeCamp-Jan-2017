@@ -9,9 +9,12 @@ Code Camp
 ## Lab Setup Guide
 ---
 # Prep 
-
-* Downoad the repo by GIT or Zip file - top right button of this repo.
-* git clone https://github.com/jasonbarbee/TekLinksCodeCamp-Jan-2017 
+* Download Vagrant and install - https://www.vagrantup.com/downloads.html
+* Download Virtualbox and install https://www.virtualbox.org/wiki/Downloads
+---
+# Prep 2
+* Downoad the repo by GIT or Zip file - top right button of the repo
+https://github.com/jasonbarbee/TekLinksCodeCamp-Jan-2017 
 * Unzip and cd to the vagrant-code-camp folder
 * issue command ```vagrant up``` -  give it 10 minutes. 
 * Then run ```vagrant ssh``` to open a SSH to the machine
@@ -95,4 +98,17 @@ Name it backup-change.yml and try to run it.
         backup: yes
         provider: "{{ cli }}"
 ```
+
+---
+# Followup Resources
+Great resources to read up on
+Network To Code Ansible Plugin
+https://github.com/networktocode/ntc-ansible
+
+Python for Network Engineers
+https://pynet.twb-tech.com/
+
+NAPALM for Ansible
+https://pynet.twb-tech.com/blog/automation/napalm-ios.html
+
 
