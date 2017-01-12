@@ -1,0 +1,25 @@
+---
+- name: VyOS Gather Facts
+  hosts: all
+  connection: local
+
+  vars:
+    version: ""
+    ansible_net_version: ""
+    cli:
+      host: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      transport: cli
+
+
+  tasks:
+    - name: collect all facts from the device
+      vyos_facts:
+        gather_subset: all
+        provider: "{{ cli }}"
+      register: result
+
+    - name: debug stuff
+      debug:
+        var: result.ansible_facts

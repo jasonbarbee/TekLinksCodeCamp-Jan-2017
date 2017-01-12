@@ -29,7 +29,7 @@ Traditional Networking **CANNOT** keep up with the pace of today's technology.
 * But we can't replace it all overnight.
 
 ---
-# Hello Network Device Programmability
+# Network Device Programmability
 
 Wait - did you mean SDN? 
 Is that Cisco ACI? ... NSX maybe? 
@@ -55,46 +55,77 @@ Meraki - Cloud Controlled API controller
 ---
 # SDN and APIs are the future
 ### Network Automation and APIs are here. 
-### But it's OK to use telnet/ssh while we cross that bridge.
+### But it's OK to use telnet/ssh tooling while we cross that bridge.
 ![60%](images/bridge.jpg)
 
 ---
 # Ansible
+### Open Source project. Free.
+### Red Hat backed - "Ansible Tower" - Commercial addon for Ansible.
+![50%](https://projectme10.files.wordpress.com/2015/11/ansible-1.png)
+### Tag Line - "SOLVE IT. AUTOMATE IT. SHARE IT."
 
+---
+# Sounds Complicated. Who needs this anyway... 
+
+
+250,000+ downloads per **month**.
+2200 contributors to the project
+750+ modules/plugins
+
+---
+# But... what does it do for me?
+From Ansible.com
+"Ansible is a radically simple IT automation engine that automates cloud provisioning, configuration management, application deployment, intra-service orchestration, and many other IT needs."
+
+---
+# What about Chef/Puppet/other tool?
+
+Ansible is agentless.
+Many other tools require a bootstrap agent on the destination machine.
 
 
 ---
 # What can Ansible do for Network Engineers?
 
-1. Template Configurations
+1. Template Configurations 
+	1. 	HSRP, Vlans, ACLs
 2. Standardize commands accross wide inventory
 2. Reset security or passwords 
 2. Audit configurations
-3. Backup Configurations on schedule or before/after.
+3. Backup Configurations on schedule or before/after changes.
 4. Per-host Ping tests
-4. Trigger API calls  
+	1. Network Testing
+4. Trigger API calls 
 5. Network Assessments/Inventory
 ---
 # What can Ansible do for Storage and Virtualization Guys?
 
 1. Build servers automatically in Vmware or Cloud
+	1. more than 100 AWS modules built in
+	2. Vmware, OpenStack, etc
 2. Automate installation packages
+	1. Support for Windows, Linux, etc 	
 3. Per host status checks or ping testing
-4. Inventory of hosts
+	1. 	Deeper testing
+4. Inventory data of all your servers
+
 ---
 # Real World Examples
 
 ---
 # Security Audit Remediation
+# Update the IOS, SSH, disable telnet and http, ssh version 2... 
 # 
 ---
-# 
+# Remedition Plan 1 - Copy and Paste
+### Fix one, get your playbook of commands and action, repeat.
 ![170%](images/kermit.gif)
 
 ---
 
 # Install Ansible - Windows
-download "Babun" - http://babun.github.io/
+Download "Babun" as a Cygwin Shell - http://babun.github.io/
 ``` 
 Loads Everything you need - copy/paste
 
@@ -165,7 +196,7 @@ Switch1 ipaddress=192.168.1.4
 Show version on devices
 ```
 ---
-  - name: Show Version
+  - name: Task Name - Show Version
     hosts: routers
     gather_facts: yes
     connection: local
@@ -202,7 +233,7 @@ tasks:
 # Template Files
 Jinja2 Format {{ }}
 ```
-!Setup the Device
+! Comments with a bang
 enable secret {{enable_password}}
 hostname {{inventory_hostname}}
 ip domain name {{domain}}
@@ -216,6 +247,17 @@ ntp server {{ntp_server}}
 ```
 ---
 # IOS Updates 
+## First we need info, a playbook to gather details.
+![180%](images/show-version-playbook.png)
+
+---
+# IOS Updates
+## We get some useful data, we can filter on
+![100%](images/ntc_show_command-version.png)
+
+---
+# IOS Transfer
+## Now we can transfer the image.
 ```
   - name: Upgrade IOS
     hosts: routers
@@ -237,12 +279,58 @@ ntp server {{ntp_server}}
 https://pynet.twb-tech.com/blog/automation/cisco-ios.html
 
 ---
+## IOS Update 
+#### Changing boot
+```
+---
+  - name: Set Username and Passwords
+    hosts: routers
+    gather_facts: yes
+    connection: local
+
+    tasks:
+
+      - ntc_config_command:
+          connection: ssh
+          platform: cisco_ios_ssh
+          port: 22
+          commands:
+            - no boot system
+            - boot system flash:c2900-universalk9-mz.SPA.155-3.M4a.bin
+            - boot system flash{{ ":" }}
+          host: "{{ inventory_hostname }}"
+          username: "{{ username }}"
+          password: "{{ password }}"
+```
+---
+## IOS Update
+#### But did it work? Sanity check
+```
+      - ntc_show_command:
+          connection: ssh
+          platform: cisco_ios_ssh
+          port: 22
+          command: 'show run | inc boot system'
+          host: "{{ inventory_hostname }}"
+          username: "{{ username }}"
+          password: "{{ password }}"
+        register: results
+
+      - debug: var=results.response
+```
+---
+# IOS Update
+## Results - 
+![100%](images/boot-results.png)
+
+
+---
 # IOS Updates
 ## Words of Caution
 ![150%](images/roughroad.jpeg)
 
 ---
-# Our Install - Vagrant
+# Install - Vagrant
 
 Instant Cof... I mean Ansible
 ![100%](images/coffee.jpg)
