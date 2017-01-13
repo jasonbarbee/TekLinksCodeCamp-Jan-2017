@@ -2,36 +2,7 @@
 - hosts: all
   gather_facts: False
   tasks:
-  - name: Install packages required to run the examples
-    apt: pkg={{item}} state=installed
-    sudo: true
-    with_items:
-         - python
-         - python-pip
-         - git
-         - build-essential
-         - python-dev
-         - libffi-dev
-         - libxml2-dev
-         - libxslt1-dev
-         - lib32z1-dev
-         - libssl-dev
-
-  - name: install required python dependencies
-    sudo: true
-    pip: requirements=/vagrant/requirements.txt executable=pip
-
-    # Clean Repo 
-  - name: Clean NTC Repo
-    shell: rm -rf /usr/share/ansible/ntc-ansible
-    sudo: true
-
-    # Install NTC Repo      
-  - name: Clone NTC-Ansible
-    shell: git clone https://github.com/networktocode/ntc-ansible --recursive /usr/share/ansible/ntc-ansible
-    sudo: true
-
-    # Install software repo 
+      # Install software repo 
   - name: Install Software Repo
     shell: apt-get -y install software-properties-common
     sudo: true
@@ -46,9 +17,55 @@
     shell: apt-get update
     sudo: true
 
+  - name: Install python and node
+    apt: pkg={{item}} state=installed
+    sudo: true
+    with_items:
+         - python
+         - python-pip
+         - git
+         - build-essential
+         - python-dev
+         - libffi-dev
+         - libxml2-dev
+         - libxslt1-dev
+         - lib32z1-dev
+         - libssl-dev
+         - npm
+         - nodejs
+
+  - name: install required python dependencies
+    sudo: true
+    pip: requirements=/vagrant/requirements.txt executable=pip
+    
+    # Fix a temporary issue with PyNTC library which ntc-ansible depends on.
+  - name: Fix Node vs nodejs Link - known ubuntu thing google it
+    shell: ln -sf /usr/bin/nodejs /usr/bin/node
+    sudo: true
+
+#    # Install Loopback and Node
+#  - npm:
+#      name: strongloop
+#      global: yes
+  
+#     Clean Repo forcefully
+#  - name: Clean NTC Repo
+#    shell: rm -rf /usr/share/ansible/ntc-ansible
+#    sudo: true
+
+  - name: Clean NTC Repo if it exists
+    file:
+      state: absent
+      path: "/usr/share/ansible/ntc-ansible"
+
+    # Install NTC Repo, git module was broken at time.      
+  - name: Clone NTC-Ansible
+    shell: git clone https://github.com/networktocode/ntc-ansible --recursive /usr/share/ansible/ntc-ansible
+    sudo: true
+
     # Install Ansible     
   - name: Install Ansible
-    shell: apt-get -y install ansible
+    shell: apt-get -y update ansible
     sudo: true
 
     # Clone Code Camp Repo      
@@ -67,16 +84,21 @@
 
   - name: Fix missing ssh known host file - ansible crashed without it
     shell: chown vagrant /home/vagrant/.ssh/known_hosts
-
+    
+    # Fix a temporary issue with PyNTC library which ntc-ansible depends on.
   - name: Rename NTC files 
     shell: mv /usr/share/ansible/ntc-ansible/setup.py /usr/share/ansible/ntc-ansible/oldsetup.py
     sudo: true
 
+    # Fix a temporary issue with PyNTC library which ntc-ansible depends on.
   - name: Rename NTC files 
     shell: mv /usr/share/ansible/ntc-ansible/setup.cfg /usr/share/ansible/ntc-ansible/oldsetup.cfg
     sudo: true
 
+    # Fix a temporary issue with PyNTC library which ntc-ansible depends on.
   - name: Rename NTC files 
     shell: mv /usr/share/ansible/ntc-ansible/ntc-templates/setup.py /usr/share/ansible/ntc-ansible/ntc-templates/oldsetup.py
     sudo: true
+
+
 
