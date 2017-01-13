@@ -69,6 +69,10 @@
     shell: git clone https://github.com/networktocode/ntc-ansible --recursive /usr/share/ansible/ntc-ansible
     sudo: true
 
+    # Install Ansible Spark Module, git module was broken at time.      
+  - name: Clone Ansible Cisco Spark Module
+    shell: sudo wget https://raw.githubusercontent.com/drew-russell/ansible/610dc9993cbcd15bf7e5e7771090debb55f1ec76/lib/ansible/modules/notification/cisco_spark.py  -O /usr/lib/python2.7/dist-packages/ansible/modules/extras/notification/cisco_spark.py
+    sudo: true
     # Install Ansible     
   - name: Install Ansible via NPM
     shell: apt-get -y update ansible

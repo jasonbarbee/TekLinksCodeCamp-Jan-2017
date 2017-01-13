@@ -81,6 +81,20 @@ Add a task to the bottom to show version.
  ### Run it and see what the data looks like
  ```ansible-playbook -i inventory get-facts.yml```
 
+--- 
+# Send a message to Cisco Spark!
+Side note : This module is pending final committment to the next version, but I have loaded it on the Code Camp box.
+
+```
+    - name: Cisco Spark - Text Message to a Room
+      cisco_spark:
+        recipient_type: roomId
+        recipient_id: "{{ roomid }}"
+        message_type: text
+        personal_token: "{{ bottoken }}"
+        message: "Your Name : Found Device - {{ result.ansible_facts.ansible_net_hostname  }}"
+```
+        
 ---
 # Backup then make a change
 This is a good time to make a new file, copy the header and provider variables, then use this as your task.

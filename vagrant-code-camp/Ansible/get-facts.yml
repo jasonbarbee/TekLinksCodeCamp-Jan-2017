@@ -23,3 +23,11 @@
     - name: debug stuff
       debug:
         var: result.ansible_facts
+
+    - name: Cisco Spark - Text Message to a Room
+      cisco_spark:
+        recipient_type: roomId
+        recipient_id: "{{ roomid }}"
+        message_type: text
+        personal_token: "{{ bottoken }}"
+        message: "Your Name : Found Device - {{ result.ansible_facts.ansible_net_hostname  }}"
