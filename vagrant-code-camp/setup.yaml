@@ -33,8 +33,6 @@
          - libssl-dev
          - npm
          - nodejs
-         - node-flint
-         - restify
 
   - name: install required python dependencies
     sudo: true
@@ -74,6 +72,16 @@
     # Install Ansible     
   - name: Install Ansible via NPM
     shell: apt-get -y update ansible
+    sudo: true
+
+    # Install Flint    
+  - name: Install Flint via NPM
+    shell: npm install -g node-flint
+    sudo: true
+
+    # Install Restify    
+  - name: Install Restify via NPM
+    shell: npm install -g restify
     sudo: true
 
     # Clone Code Camp Repo      
