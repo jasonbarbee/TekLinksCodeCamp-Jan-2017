@@ -33,6 +33,8 @@
          - libssl-dev
          - npm
          - nodejs
+         - node-flint
+         - restify
 
   - name: install required python dependencies
     sudo: true
