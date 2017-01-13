@@ -28,6 +28,8 @@ Running a single instance in the cloud for this lab.
 
 ---
 # Start building a playbook
+Verital and Spacing is VERY important.
+
 Open a text editor, and build a new file - called get-facts.yml
 ```
 ---
@@ -45,7 +47,7 @@ Open a text editor, and build a new file - called get-facts.yml
       transport: cli
 ```
 ---
-# Add a Task to gather all facts
+# Add a Task to gather all router facts
 ```
   tasks:
     - name: collect all facts from the device
@@ -83,8 +85,7 @@ Add a task to the bottom to show version.
 
 --- 
 # Send a message to Cisco Spark!
-Side note : This module is pending final committment to the next version, but I have loaded it on the Code Camp box.
-
+Update your inventory file with your Spark Auth Token and your Customer Name.
 ```
     - name: Cisco Spark - Text Message to a Room
       cisco_spark:
@@ -94,7 +95,8 @@ Side note : This module is pending final committment to the next version, but I 
         personal_token: "{{ bottoken }}"
         message: "Your Name : Found Device - {{ result.ansible_facts.ansible_net_hostname  }}"
 ```
-        
+Side note : This module is pending final committment to the next version, but I have loaded it on the Code Camp box.
+
 ---
 # Backup then make a change
 This is a good time to make a new file, copy the header and provider variables, then use this as your task.
@@ -113,6 +115,23 @@ Name it backup-change.yml and try to run it.
         src: vyos.cfg
         backup: yes
         provider: "{{ cli }}"
+```
+---
+# AWS - Basic Inventory List
+
+Run ```ansible-playbook -i inventory aws-facts.yml``` to see my AWS inventory running for this Lab.
+
+```
+- name: Gather EC2 facts
+      ec2_remote_facts:
+        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+        region: "{{ EC2_REGION }}"
+      register: ec2_facts
+
+    - name: Debug
+      debug:
+        msg: "{{ ec2_facts }}"
 ```
 
 ---

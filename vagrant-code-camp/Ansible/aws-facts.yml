@@ -1,0 +1,21 @@
+---
+- name: Gather Facts from AWS EC2 Instances
+  hosts: all
+  connection: local
+
+  vars:
+    AWS_ACCESS_KEY_ID: "AKIAI4AG7WHLQXRRDD3Q"
+    AWS_SECRET_ACCESS_KEY: "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"
+    EC2_REGION: "us-west-2"
+
+  tasks:
+    - name: Gather EC2 facts
+      ec2_remote_facts:
+        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+        region: "{{ EC2_REGION }}"
+      register: ec2_facts
+
+    - name: Debug
+      debug:
+        msg: "{{ ec2_facts }}"
