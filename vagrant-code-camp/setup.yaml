@@ -42,9 +42,9 @@
   - name: Fix Node vs nodejs Link - known ubuntu thing google it
     shell: ln -sf /usr/bin/nodejs /usr/bin/node
     sudo: true
-    
+
     # Install Loopback via root 
-  - name: Install Ansible
+  - name: Install Loopback via NPM this will take 10-20 minutes
     shell: npm install -g strongloop
     sudo: true
 
@@ -70,7 +70,7 @@
     sudo: true
 
     # Install Ansible     
-  - name: Install Ansible
+  - name: Install Ansible via NPM
     shell: apt-get -y update ansible
     sudo: true
 
