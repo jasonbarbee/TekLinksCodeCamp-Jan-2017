@@ -120,5 +120,8 @@
     shell: mv /usr/share/ansible/ntc-ansible/ntc-templates/setup.py /usr/share/ansible/ntc-ansible/ntc-templates/oldsetup.py
     sudo: true
 
+  - name: Install Serverless framework
+    shell: apt-get install serverless -g
+    sudo: true
 
 
