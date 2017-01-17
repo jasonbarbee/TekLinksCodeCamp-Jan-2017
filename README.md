@@ -28,3 +28,4 @@ Learn about the building blocks of the Cisco Digital Network Architecture (DNA),
 ## Ansible 
 
 *[Python/Ansible for Network Engineers](https://pynet.twb-tech.com)
+*[IOS Updates via Ansible](https://pynet.twb-tech.com/blog/automation/cisco-ios.html)

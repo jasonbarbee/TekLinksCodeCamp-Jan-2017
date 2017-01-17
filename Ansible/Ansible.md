@@ -1,24 +1,29 @@
-![](images/teklinks.png)
+footer: TekLinks Code Camp
+slidenumbers: true
+autoscale: true
+
 Code Camp
 ==
-
-<!-- footer: TekLinks Code Camp - Jan 2017 -->
-
-<!-- *page_number: true -->
-
 ## Ansible Introduction
- Jason Barbee
+
+![inline 100%](images/teklinks.png)
+
+Jason Barbee
 Solutions Architect
 CCIE #18039
 
 ---
-Goals
+Agenda
 ==
 
 1. APIs and CLIs
-1. Orchestration
 1. Ansible Intro
-1. Demo time
+1. Use Cases
+1. Installing Ansible
+1. Using Ansible
+
+---
+# APIS and CLIs
 
 ---
 # Device Provision Time
@@ -31,39 +36,60 @@ Traditional Networking **CANNOT** keep up with the pace of today's technology.
 ---
 # Network Device Programmability
 
-Wait - did you mean SDN? 
-Is that Cisco ACI? ... NSX maybe? 
-_Sort of._
+- Wait - did you mean SDN? 
+- Is that Cisco ACI? ... NSX maybe? 
 
-
-![50%](images/pacman-cisco.png)
 
 ---
+# SDN requires networking to be automated
+![inline fit 60%](images/pacman-cisco.png)
+
+---
+
 # A tale of two worlds
-
 ## IOS CLI telnet / SSH
-Huge install base. 
-Will be around for for many years to come.
-
-## Cisco Next Generation Networking API Interfaces
-APIC-EM - REST controller for new generation routers
-ACI - API controller for true SDN networking
-DNA/Panda/Yang - Cisco's built in agent for provisioning in ISR4ks, and 3850 Switches (Denali OS)
-NX-OS - REST API built into Nexus OS.
-Meraki - Cloud Controlled API controller
+* Huge install base. 
+* Will be around for for many years to come.
 
 ---
-# SDN and APIs are the future
+
+# Cisco Networking APIs
+* APIC-EM - REST controller for IOS Routers
+* ACI - API controller for true SDN networking
+* DNA/Panda/Yang - ISR4ks, 3850 Switches (Denali)
+* NX-OS - REST API built into Nexus OS.
+* Meraki - Cloud Controlled API controller
+
+---
+
+# APIs are the future
+
 ### Network Automation and APIs are here. 
-### But it's OK to use telnet/ssh tooling while we cross that bridge.
-![60%](images/bridge.jpg)
+### But it's OK to use telnet/ssh tooling while we cross that bridge[^1].
+![inline 60%](images/bridge.jpg)
+
+[^1]: But sometimes feels like this!
 
 ---
-# Ansible
-### Open Source project. Free.
-### Red Hat backed - "Ansible Tower" - Commercial addon for Ansible.
-![50%](https://projectme10.files.wordpress.com/2015/11/ansible-1.png)
-### Tag Line - "SOLVE IT. AUTOMATE IT. SHARE IT."
+Agenda
+==
+
+1. APIs and CLIs
+1. **Ansible Intro**
+1. Use Cases
+1. Installing Ansible
+1. Using Ansible
+
+---
+# Ansible Intro
+
+- Automate all the 'things'
+- Open Source project. Free.
+- Red Hat backed - "Ansible Tower" - Commercial addon for Ansible.
+<br>
+![inline 50%](https://projectme10.files.wordpress.com/2015/11/ansible-1.png)
+
+### "SOLVE IT. AUTOMATE IT. SHARE IT."
 
 ---
 # Sounds Complicated. Who needs this anyway... 
@@ -75,8 +101,13 @@ Meraki - Cloud Controlled API controller
 
 ---
 # But... what does it do for me?
-From Ansible.com
-"Ansible is a radically simple IT automation engine that automates cloud provisioning, configuration management, application deployment, intra-service orchestration, and many other IT needs."
+> "Ansible is a radically simple IT automation engine that automates cloud provisioning, configuration management, application deployment, intra-service orchestration, and many other IT needs."
+-- Ansible.com
+
+---
+# Even Cisco is in this game
+> "The work the Ansible team is doing… is something the entire industry should be paying attention to."
+--Lew Tucker, VP & CTO, Cloud Computing, Cisco
 
 ---
 # What about Chef/Puppet/other tool?
@@ -88,16 +119,15 @@ Many other tools require a bootstrap agent on the destination machine.
 ---
 # What can Ansible do for Network Engineers?
 
-1. Template Configurations 
-	1. 	HSRP, Vlans, ACLs
+1. Template IOS Configurations -	HSRP, Vlans, ACLs
 2. Standardize commands accross wide inventory
 2. Reset security or passwords 
 2. Audit configurations
 3. Backup Configurations on schedule or before/after changes.
-4. Per-host Ping tests
-	1. Network Testing
+4. Per-host Ping tests -  Network Testing
 4. Trigger API calls 
 5. Network Assessments/Inventory
+
 ---
 # What can Ansible do for Storage and Virtualization Guys?
 
@@ -111,22 +141,45 @@ Many other tools require a bootstrap agent on the destination machine.
 4. Inventory data of all your servers
 
 ---
-# Real World Examples
+Agenda
+==
+
+1. APIs and CLIs
+1. Ansible Intro
+1. **Use Cases**
+1. Installing Ansible
+1. Using Ansible
 
 ---
+
 # Security Audit Remediation
-# Update the IOS, SSH, disable telnet and http, ssh version 2... 
-# 
----
-# Remedition Plan 1 - Copy and Paste
-### Fix one, get your playbook of commands and action, repeat.
-![170%](images/kermit.gif)
+* Update the IOS, SSH, disable telnet and http, ssh version 2... 
 
 ---
 
+# Traditional way - Copy and Paste
+### Fix one device, get your "plan" of commands and action, repeat.
+![inline fit](images/kermit.gif)
+
+---
+# Or maybe there's a better way 
+
+---
+Goals
+==
+
+1. APIs and CLIs
+1. Ansible Intro
+1. Use Cases
+1. **Installing Ansible**
+1. Using Ansible
+
+
+---
 # Install Ansible - Windows
 Download "Babun" as a Cygwin Shell - http://babun.github.io/
-``` 
+
+```bash
 Loads Everything you need - copy/paste
 
 curl -s https://raw.githubusercontent.com/tiangolo/ansible-babun-bootstrap/master/install.sh | source /dev/stdin
@@ -144,32 +197,106 @@ you might have to exit and "rebaseall" - run this if you get errors about child 
 cmd /c %SYSTEMDRIVE%\Users\%USERNAME%\.babun\cygwin\bin\dash.exe -c '/usr/bin/rebaseall -v'
 then Babun again
 ```
+
 ---
 # Install Continued
 Ubuntu 
-```
+
+```bash
 sudo apt-get install ansible
 ```
+
 Fedora
-```
+
+```bash
 yum install ansible
 ```
+
 Mac
-``` 
+
+```bash 
 xcode-select --install
 easy_install --user pip
 ```
 ---
-# Inventory 
-Group Name
-Hostname (variable=value)
+# Install PIP Libraries
+Jinja2
+MarkupSafe
+jtextfsm
+requests
+psutil
+python-slugify
+ciscoconfparse
+netmiko
+lxml
+napalm
+ntc-ansible
+pyntc
+
+---
+# Ok you lost me. That is way too much work.
+
+---
+# Vagrant & Ansible
+
+Let's make some instant ~~Cof...~~ Ansible
+<br>
+![inline 100%](images/coffee.jpg)
+
+- Vagrant launches a VM, then installs Ansible
+- Instant Ansible/Python Dev Box anytime, with virtualbox and Ansible. 
+
+
+---
+# How do I use it?
+Vagrant installed Ubuntu, all the requirements and you can use it.
 ```
+Vagrant up
+``` - installs and provisions.
+```
+Vagrant ssh
+``` - connects to your VM Shell
+
+It mapped a shared folder within the VM - /vagrant
+so within your Vagrant VM - any edits you make to your Ansible folder are mapped
+
+---
+Agenda
+==
+
+1. APIs and CLIs
+1. Ansible Intro
+1. Use Cases
+1. **Using Ansible**
+
+---
+# Meet YAML Syntax
+^ It's not a newly discovered creature...
+Syntax looks like this-
+
+```yaml
+---
+# A list of tasty fruits
+fruits:
+    - Apple
+    - Orange
+    - Strawberry
+    - Mango
+```
+
+
+---
+# Inventory 
+- Group Name
+- Hostname (variable=value)
+
+```yaml
 [routers]
 192.168.1.1 username=admin password=admin
 ```
 ---
 # Inventory - Group Variables
-```
+```yaml
 [all:vars]
 domain=mydomain.org
 admin_user=admin
@@ -184,17 +311,10 @@ interface=gi0/0
 
 [ROUTERS]
 Router1 ipaddress=192.168.1.2
-
-[SWITCHES:vars]
-interface=vlan1
-
-[SWITCHES]
-Switch1 ipaddress=192.168.1.4
 ```
 ---
-# Playbooks 
-Show version on devices
-```
+# Playbook - Show Version
+```yaml
 ---
   - name: Task Name - Show Version
     hosts: routers
@@ -215,9 +335,10 @@ tasks:
       provider: "{{ cli }}"
 
 ```
+
 ---
 # Playbooks - Templating playbook
-```
+```yaml
   - name: Build Router Templates
     hosts: all
     connection: local
@@ -229,11 +350,10 @@ tasks:
           src=templates/routers.j2
           dest=configs/{{inventory_hostname}}.conf
 ```
+
 --- 
-# Template Files
-Jinja2 Format {{ }}
-```
-! Comments with a bang
+# Template Files - Jinja2
+```jinja
 enable secret {{enable_password}}
 hostname {{inventory_hostname}}
 ip domain name {{domain}}
@@ -245,20 +365,22 @@ transport input telnet ssh
 privilege level 15
 ntp server {{ntp_server}}
 ```
----
-# IOS Updates 
-## First we need info, a playbook to gather details.
-![180%](images/show-version-playbook.png)
 
 ---
 # IOS Updates
-## We get some useful data, we can filter on
-![100%](images/ntc_show_command-version.png)
+- First we need info, a playbook to gather details.
+
+![inline fit](images/show-version-playbook.png)
+
+---
+# IOS Updates
+## We get some useful data, we can filter on, dump it to files, run it through an API
+![inline](images/ntc_show_command-version.png)
 
 ---
 # IOS Transfer
-## Now we can transfer the image.
-```
+#### Now we can transfer the image.
+```yaml
   - name: Upgrade IOS
     hosts: routers
     gather_facts: yes
@@ -276,12 +398,10 @@ ntp server {{ntp_server}}
           overwrite=true
 ```
 
-https://pynet.twb-tech.com/blog/automation/cisco-ios.html
-
 ---
 ## IOS Update 
-#### Changing boot
-```
+#### Changing boot to the new IOS 
+```yaml
 ---
   - name: Set Username and Passwords
     hosts: routers
@@ -305,7 +425,7 @@ https://pynet.twb-tech.com/blog/automation/cisco-ios.html
 ---
 ## IOS Update
 #### But did it work? Sanity check
-```
+```yaml
       - ntc_show_command:
           connection: ssh
           platform: cisco_ios_ssh
@@ -320,20 +440,22 @@ https://pynet.twb-tech.com/blog/automation/cisco-ios.html
 ```
 ---
 # IOS Update
-## Results - 
-![100%](images/boot-results.png)
-
+#### Yep. :+1: 
+![100% inline](images/boot-results.png)
 
 ---
 # IOS Updates
 ## Words of Caution
-![150%](images/roughroad.jpeg)
+![inline original 100%](images/roughroad.jpeg)
 
+- Library Issues
+- Transfer timeouts
+- Verify the IOS
 
 ---
-# Install - Vagrant
+# Wrapping up
+- Look for places you can use Automation!
+- Automate all the things.
 
-Instant Cof... I mean Ansible
-![100%](images/coffee.jpg)
-
-Instant Ansible/Python Dev Box anytime, with virtualbox and Ansible. 
+---
+# Thank you.
