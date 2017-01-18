@@ -2,11 +2,11 @@ footer: TekLinks Code Camp
 slidenumbers: true
 autoscale: true
 
-Code Camp
-==
+![left inline](images/teklinks.png)
+# Code Camp
 ## Ansible Introduction
 
-![inline 100%](images/teklinks.png)
+
 
 Jason Barbee
 Solutions Architect
@@ -62,10 +62,8 @@ Traditional Networking **CANNOT** keep up with the pace of today's technology.
 
 ---
 
-# APIs are the future
-
-### Network Automation and APIs are here. 
-### But it's OK to use telnet/ssh tooling while we cross that bridge[^1].
+# Network Automation is the future
+### It's OK to use telnet/ssh tooling while we cross that bridge[^1].
 ![inline 60%](images/bridge.jpg)
 
 [^1]: But sometimes feels like this!
@@ -94,10 +92,11 @@ Agenda
 ---
 # Sounds Complicated. Who needs this anyway... 
 
-
 250,000+ downloads per **month**.
 2200 contributors to the project
 750+ modules/plugins
+100+ modules for Amazon
+Modules for every major networking manufacturer.
 
 ---
 # But... what does it do for me?
@@ -112,7 +111,7 @@ Agenda
 ---
 # What about Chef/Puppet/other tool?
 
-Ansible is agentless.
+Ansible is agent-less.
 Many other tools require a bootstrap agent on the destination machine.
 
 
@@ -152,8 +151,11 @@ Agenda
 
 ---
 
-# Security Audit Remediation
-* Update the IOS, SSH, disable telnet and http, ssh version 2... 
+# Real world stuff
+* Security Audit Remediation
+  * Update the IOS
+  * Disable tetlnet, generate keys, turn on SSH, disable http, ssh version 2... 
+  * ACL standardization
 
 ---
 
@@ -165,7 +167,7 @@ Agenda
 # Or maybe there's a better way 
 
 ---
-Goals
+Agenda
 ==
 
 1. APIs and CLIs
@@ -270,8 +272,9 @@ Agenda
 1. **Using Ansible**
 
 ---
-# Meet YAML Syntax
-^ It's not a newly discovered creature...
+^ It's not a newly discovered creature... Before we tell ansible....
+# YAML Syntax
+Inventory files and Tasks use YAML Syntax
 Syntax looks like this-
 
 ```yaml
@@ -367,6 +370,10 @@ ntp server {{ntp_server}}
 ```
 
 ---
+# IOS Update
+## Let's explore what an IOS update process might look like
+
+---
 # IOS Updates
 - First we need info, a playbook to gather details.
 
@@ -454,8 +461,16 @@ ntp server {{ntp_server}}
 
 ---
 # Wrapping up
-- Look for places you can use Automation!
-- Automate all the things.
+- Look for places you can use Automation and gain experience!
+  - Wrap up a project - backup all the configs
+  - Security remediation or other bulk changes 
+  - Network Inventory tasks
+- Actively Seek billable work where you can add value doing automation.
+- Don't settle for a copy paste lifestyle. Automate it.
 
 ---
+<br>
 # Thank you.
+<br>
+# Questions?
+

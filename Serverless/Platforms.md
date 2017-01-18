@@ -2,17 +2,15 @@ footer: TekLinks Code Camp
 slidenumbers: true
 autoscale: true
 
-![inline](images/teklinks.png)
-Code Camp
-==
-
+![left inline](images/teklinks.png)
+# Code Camp
 ## Serverless Platforms
  Jason Barbee
 Solutions Architect
 CCIE #18039
 
 ---
-Goals
+Agenda
 ==
 
 1. Evolution of a Platform
@@ -35,12 +33,31 @@ VMWare Servers on physical hardware, SANs, Networking
 Provision Time - ~ 1-2 hours
 
 ---
+# Compute in ~2014 - Virtual Machines 
+* Spin up VMs at your favorite provider - 
+* TekLinks, AWS, Google, Azure, dozens of providers...
+
+---
 # Compute in 2017 - Microservices and APIs
 * FAAS / Function as a Service Providers.
 * AWS, Google, Azure, Webtasks
+* Your customer's routers.
+* Your customer's compute, or hyperconvered.
 
 ---
-Goals
+^ Cisco wants to have a world where your routers are just compute and storage resources, like AWS, you can push functions to.
+^ Or just run small services on them, like IoT things gathering data from a local site and storing.
+# Routers = Cloud
+#### Routers can run third party service containers. AKA - your code
+![inline fill](images/router-hosting.png)
+
+---
+# Servers = Cloud 
+## Azure wants to run on your bare metal. Same APIs as public cloud
+![inline](images/azure-stack.png)
+
+---
+Agenda
 ==
 
 1. Evolution of a Platform
@@ -51,35 +68,26 @@ Goals
 
 
 ---
-# API Connector Services
-* IFTT
-* Zapier
+# API Connector Services - IFTT
+![inline fill](images/iftt2.png)
 
 ---
-# IFTT.com - Consumer Facing Automation
-
-Simple Action "Recipes"
-![inline fit 100%](images/recipe.jpeg) 
-
-^ Free. 
-
----
-### IFTT - Custom Actions to anything
-Add custom actions with Maker Channel to any URL.
-![inline 50%](images/maker.png)
-
+### IFTT - Custom REST Actions to anything
+![left inline 50%](images/maker.png)
+- Add custom actions with Maker Channel to any URL.
 - Send a REST call to any endpoint on the internet.
 - Make a Spark call, Tropo Call, Turn on/Off lights.
 
 ---
-# Zapier.com - Business Logic Automattion
+# Zapier.com - Business Logic 
 * More logic and customization of actions.
-* Still End User Friendly. Free plan and up.
-* 750+ API integrations
-![inline 160%](images/zapier.png)    ![inline 40%](images/zapierdetails.png)
+* Still End User Friendly. Free and commercial plans.
+* 750+ API integrations built in
+
+![right fit](images/zapierdetails.png)
 
 ---
-Goals
+Agenda
 ==
 
 1. Evolution of a Platform
@@ -108,10 +116,8 @@ Bots are a new User Interface.
 * Microsoft Bot Framework
 * Serverless Bots with URL Web Hooks and Actions
 
-![40%](images/gupshup.jpg)
-
 ---
-Goals
+Agenda
 ==
 
 1. Evolution of a Platform
@@ -123,13 +129,12 @@ Goals
 
 ---
 # Function-As-A-Service
-![inline 50%](images/googlecloud.jpeg) ![inline 20%](images/hookio.png)![inline 50%](images/webtask.png)
-![inline 50%](images/AWSlambda.jpg) ![inline 50%](images/azure.png)
-
 * Function as a Service to run small units of code on on requests or evenets
 * Read or Write to a database.
 * Call a Spark Log
 * Call a payment processing and return a value.
+![inline 50%](images/googlecloud.jpeg)![inline 20%](images/hookio.png)![inline 50%](images/webtask.png)
+![inline 50%](images/AWSlambda.jpg) ![inline 50%](images/azure.png)
 
 ---
 # AWS Microservice Example
@@ -161,6 +166,8 @@ http://spark.cisco.com
   "roomID" : "1234123213125125234234"
 }
 
+---
+# Storing Data
 
 ---
 # DynamoDB -  NoSQL Database 
@@ -229,6 +236,21 @@ Click Getting Started to import the example PetStore API.
 ---
 # PetStore GET - Response/Test
 ![inline %120](images/petstore3.png)
+
+---
+^ I know what you're thinking. It is.
+# That looks too complicated
+---
+^ Let's see the easy way. With these commands a little credentials, we just deployed a Hello World API.
+## Meet the Serverless Framework - www.serverless.com
+![inline](images/serverless-logo.png)
+
+--- 
+^ There's a lot of magic here.
+# Serverless magic
+* Cloudformation to build your environment - API, Lambda, Storage, Databases.
+* API Versioning 
+* Staging to Production
 
 ---
 # Lab  4 - Simple Microservices @ Hook.io
