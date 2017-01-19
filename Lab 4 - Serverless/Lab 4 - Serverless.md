@@ -36,13 +36,14 @@ Hook.io will give you a very simple click to start web hook service.
 
 ---
 # Add a new service at Hook.io
-Click Create MicroService at the top navigation bar.
-![100%](images/hook-new.png)
-# Make sure to call it ```securityalert```
+Click Create MicroService at the top navigation bar. - Call it **sparklogger**
+
+![inline fit](images/hook-new.png)
+
 
 ---
 # Copy Spark Logging Code
-Copy ```sparklogger.js``` (in the Lab 4 Serverless)
+Copy ```sparklogger.js``` (in the Lab 4 Serverless Folder)
 Paste/Save the content into a new hook at Hook.io called "sparklogger")
 Your Hook.io URL for should looke like this
 
@@ -55,6 +56,46 @@ It requires these parameters
 * message - the content you want to post
 
 ---
+# Spark Logger Code
+```javascript
+module['exports'] = function simpleHttpRequest (hook) {
+  // npm modules available, see: http://hook.io/modules
+    var request = require('request');
+	var botToken= hook.params.bottoken;
+  	var roomId= hook.params.roomid;
+  	var text= hook.params.message;
+  	var body={"roomId": roomId , "text": text};
+    var postReq = {
+            url: "https://api.ciscospark.com/v1/messages",
+            method: "POST",
+            headers: {
+                    'Accepts': 'application/json',
+                    'Content-type': 'application/json',
+                    'Authorization': "Bearer " + botToken
+                    },
+      		json: body,
+            };
+	
+    request.post(postReq,function(err, res, body){
+  
+    if (err) {
+      console.log("Error", err.message);
+      return hook.res.end(err.message);
+    }
+      //Check for right status code
+    if(res.statusCode !== 200){
+        console.log('Invalid Status Code Returned:', res.statusCode);
+      return hook.res.end("Spark API Error " + res.statusCode);
+    }
+
+    //All is good. Print the body
+      return hook.res.end("Spark Message Sent");
+    });
+
+};
+```
+
+---
 # Test it in Postman
 Now if you call your URL 
 https://hook.io/jasonbarbee/sparklogger
@@ -63,7 +104,7 @@ it should post our message...
 ![inline 90%](images/postman-spark.png)![inline 90%](images/spark-success.png)
 
 ---
-# That was a simple example. 
+# Making a useful API
 Let's make an API that creates,updates,deletes a router inventory.
 We will use AWS API Gateway, AWS DynamoDB, and AWS Lambda.
 
@@ -83,21 +124,28 @@ In the User record in the AWS IAM Dashboard, look for Managed Policies on the Pe
 In the next screen, search for and select AdministratorAccess then click Attach.
 
 ---
+# Vagrant Check
+This lab is designed to be run inside the Vagrant profile provided in the Code Camp Repo.
+Make sure you have 
+CD to the vagrant-code-camp folder and run
+"vagrant ssh" to access the Vagrant VM.
+This Lab 4 is designed to run inside the Serverless Folder within that.
+
+---
 # Give Severless AWS Access
 Replace the keys below with your own.
 
 ```
-serverless config credentials --provider aws --key AKIAIOSFODNN7EXAMPLE --secret wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+serverless config credentials --provider aws --key myawesomekey --secret myawesomesecret
 ```
 
 ---
-# Change Directory to Serverless example
+# Let's deploy our prebuilt API
+Change Directory to Serverless example
 
-```
-Repo root/Serverless/rest-API
-```
+Code Camp Repo / Vagrant/Serverless
 
-**This will load the depedancy files to the folder. If you don't do this step it will fail.**
+**This next step will load the depedancy packages to the folder. If you don't do this step it will fail.**
 
 ```
 npm install
