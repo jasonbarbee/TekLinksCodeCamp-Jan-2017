@@ -252,11 +252,4 @@ Click Getting Started to import the example PetStore API.
 * API Versioning 
 * Staging to Production
 
----
-# Lab  4 - Simple Microservices @ Hook.io
-
-Create a Hook.io Account
-Make a function as a service process to call our Spark Logger.
-
----
 

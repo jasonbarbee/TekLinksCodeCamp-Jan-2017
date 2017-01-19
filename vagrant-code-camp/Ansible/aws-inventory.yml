@@ -1,0 +1,34 @@
+---
+- name: VyOS Inventory Collector
+  hosts: all
+  connection: local
+
+  vars:
+    version: ""
+    ansible_net_version: ""
+    cli:
+      host: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      transport: cli
+
+  tasks:
+    - name: collect all facts from the device
+      vyos_facts:
+        gather_subset: all
+        provider: "{{ cli }}"
+      register: result
+
+    - name: Write a record to AWS API 
+      uri:
+        url: "https://3snrpqj7tj.execute-api.us-east-1.amazonaws.com/dev/routers"
+        method: POST
+        HEADER_Content-Type: application/json
+        body: '{ 
+            "ip" : "{{ inventory_hostname }}", 
+            "version" : "{{ result.ansible_facts.ansible_net_version }}", 
+            "hostname" : "{{ result.ansible_facts.ansible_net_hostname  }}", 
+            "customer" : "{{ customername }}"
+            }'
+        body_format: json
+        validate_certs: no
