@@ -57,6 +57,11 @@ Provision Time - ~ 1-2 hours
 ![inline](images/azure-stack.png)
 
 ---
+# Servers = Cloud
+## OpenStack wants to run on bare metal and provide APIs for compute, storage and networking.
+![inline](images/openstack.png)
+
+---
 Agenda
 ==
 
@@ -98,13 +103,9 @@ Agenda
 
 
 ---
-# Why would I want a bot?
+# Bots the new User interface
+Why would I want to talk to a bot?
 We all hate calling and navigating IVRs.
-Bots are a new User Interface.
-
-* /reboot serverfarm
-* /forward 5555555555
-* any interaction
 
 ---
 # Bot Platforms
@@ -198,7 +199,7 @@ db.book.insert({
 ![inline fit 100%](images/NetOps-chat.png)
 
 --- 
-# What does a real function look like?
+# What does a microservice function look like?
 
 ---
 # Hello World at hook.io
@@ -211,18 +212,9 @@ module['exports'] = function helloWorld (hook) {
 ```
 
 ---
-# Hello world at Webtask.io
-```javascript
-module.exports = 
-	function (cb) {
-    	cb(null, 'Hello World');
-    }
-```
-
----
 # Make a API Gateway example
 Login to AWS Console
-Go to API Gateway. Click Getting Started. You'll get the PetStore API.
+Go to API Gateway. Click Getting Started. You'll get the default PetStore API.
 
 ---
 # Example API Gateway
@@ -238,8 +230,18 @@ Click Getting Started to import the example PetStore API.
 ![inline %120](images/petstore3.png)
 
 ---
-^ I know what you're thinking. It is.
-# That looks too complicated
+# Ok this isn't Fair
+I used the template, and PetStoreAPI doesn't actally do anything.
+
+---
+# AWS API Gateway
+You have to define all the endpoints one by one
+create functions, link them to the API one by one
+upload files and NPM packages to S3 if you want any imports
+Stage dev and production if you want to have a backup copy hot and ready
+Basically there's a lot of stuff to wire together, and a lot of clicks.
+
+
 ---
 ^ Let's see the easy way. With these commands a little credentials, we just deployed a Hello World API.
 ## Meet the Serverless Framework - www.serverless.com
@@ -252,4 +254,70 @@ Click Getting Started to import the example PetStore API.
 * API Versioning 
 * Staging to Production
 
+--- 
+# Example of Serverless Deployment
 
+```bash
+vagrant@vagrant:/vagrant/Serverless$ serverless config credentials --provider aws --key mykey --secret mysecret
+Serverless: Setting up AWS...
+Serverless: Saving your AWS profile in "~/.aws/credentials"...
+Serverless: Success! Your AWS access keys were stored under the "default" profile.
+vagrant@vagrant:/vagrant/Serverless$ serverless deploy
+Serverless: Packaging service...
+Serverless: Uploading CloudFormation file to S3...
+Serverless: Uploading service .zip file to S3 (3.6 MB)...
+Serverless: Updating Stack...
+Serverless: Checking Stack update progress...
+......................................
+Serverless: Stack update finished...
+Service Information
+service: serverless-rest-api-with-dynamodb
+stage: dev
+region: us-east-1
+api keys:
+  None
+endpoints:
+  POST - https://3snrpqj7tj.execute-api.us-east-1.amazonaws.com/dev/routers
+  GET - https://3snrpqj7tj.execute-api.us-east-1.amazonaws.com/dev/routers
+  GET - https://3snrpqj7tj.execute-api.us-east-1.amazonaws.com/dev/routers/{id}
+  PUT - https://3snrpqj7tj.execute-api.us-east-1.amazonaws.com/dev/routers/{id}
+  DELETE - https://3snrpqj7tj.execute-api.us-east-1.amazonaws.com/dev/routers/{id}
+functions:
+  serverless-rest-api-with-dynamodb-dev-update: arn:aws:lambda:us-east-1:062829191412:function:serverless-rest-api-with-dynamodb-dev-update
+  serverless-rest-api-with-dynamodb-dev-get: arn:aws:lambda:us-east-1:062829191412:function:serverless-rest-api-with-dynamodb-dev-get
+  serverless-rest-api-with-dynamodb-dev-list: arn:aws:lambda:us-east-1:062829191412:function:serverless-rest-api-with-dynamodb-dev-list
+  serverless-rest-api-with-dynamodb-dev-create: arn:aws:lambda:us-east-1:062829191412:function:serverless-rest-api-with-dynamodb-dev-create
+  serverless-rest-api-with-dynamodb-dev-delete: arn:aws:lambda:us-east-1:062829191412:function:serverless-rest-api-with-dynamodb-dev-delete
+vagrant@vagrant:/vagrant/Serverless$
+```
+
+---
+# Lab 4 - Going Serverless
+You will get to build/deploy/play with
+* Hook.io Microservice that logs to a Spark Room.
+* AWS REST API that actually interfaces with a DynamoDB.
+* Using Ansible to push inventory data into that AWS REST API.
+
+---
+# Wrapping up
+* No we don't all have to write code tomorrow.
+* There's never been a more exciting time in our field. 
+* Engineers are building cool stuff and sharing it.
+* Open source is better than ever, and has a lot of corporate backing.
+
+---
+# Call to Action:
+
+Actively seek opportunities and Engage us (myself and Jeremy Sanders) to
+
+* Tie collaboration or workflow platforms together
+* Add human like interactions to common tasks via chat bots
+* Write small apps that integrate business processes together
+* Help you deploy and learn Ansible.
+* Write scripting to be more efficient on projects if you find yourself facing a large repetitive task set or a chain of processes.
+
+---
+<br>
+# Thank you.
+<br>
+# Questions?

@@ -460,12 +460,20 @@ ntp server {{ntp_server}}
 - Verify the IOS
 
 ---
+# Review
+* Our demos today are around CLI devices, and Vagrant.
+* Ansible is much more, and has 750+ modules. It will automate anything.
+* It is possible to live the Automated lifestyle now.
+
+---
 # Wrapping up
-- Look for places you can use Automation and gain experience!
+- Experiment with Ansible
   - Wrap up a project - backup all the configs
   - Security remediation or other bulk changes 
-  - Network Inventory tasks
+  - Network Inventory/Audit tasks
+  - Bulk Command output or Testing
 - Actively Seek billable work where you can add value doing automation.
+  * Engage myself or Jeremy in a project to help, or just have us run the project.
 - Don't settle for a copy paste lifestyle. Automate it.
 
 ---

@@ -13,14 +13,13 @@ CCIE #18039
 Agenda
 ==
 
-1. Add a Hook.io 
+1. Add a Hook.io that will:
   1. Send data to Spark
   1. Send a call request to Tropo
 1. Ansible
     1. Create check for VyOS
     1. Create Trigger for VyOS detection task
-    
-    1. Remove the API
+    1. Test our Security policy trigger.
 
 ---
 # Goal
@@ -53,8 +52,9 @@ It requires these parameters
 * message - the content you want to post
 * customername - a customer name - just use your own name
 * numbertocall - a phone number to dial
+
 ---
-# Update your inventory keys
+# Update your inventory keys and Phone Number
 Update your Ansible inventory file with your tokens
 
 ```yaml
@@ -128,5 +128,10 @@ Do not change the Roomid. The roomid key already points to the TekLinks Spark Co
 # Run Ansible and see if it works!
 
 ```ansible-playbook -i inventory security-test.yml```
-You should get a Spark message in the Code Camp Room 
+You should get a Spark message in the Code Camp Room
+And if you entered your Phone number, a phone call from Tropo announcing this message.
 ![inline 150%](images/spark-ansible.png)
+
+---
+# End of Lab
+## Thanks!

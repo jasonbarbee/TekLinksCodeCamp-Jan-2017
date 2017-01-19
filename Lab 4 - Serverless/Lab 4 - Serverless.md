@@ -254,3 +254,7 @@ On the right we see both entries, our custom posted entry, and the Ansible entry
 ![inline 100%](images/api-gateway5.png)
 Caution if you run Ansible more than once, it will upload duplicates. 
 If you feel like rewriting some code to prevent that - go for it.
+
+---
+# End of Lab
+## Thanks!
