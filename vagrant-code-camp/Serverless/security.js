@@ -58,16 +58,16 @@ module.exports.sparkalert = (event, context, callback) => {
   
     if (err) {
       console.log("Error", err.message);
-      callback(null, { message: err.message }, { event });
+      callback(null, { message: err.message, event });
     }
       //Check for right status code
     if(res.statusCode !== 200){
         console.log('Invalid Status Code Returned:', res.statusCode);
-      callback(null, {message: "Spark API Error " + res.statusCode }, { event });
+      callback(null, {message: "Spark API Error " + res.statusCode,  event });
     }
 
     //All is good. Print the body
-    callback(null, { message : "Spark Message Sent" }, { event });
+    callback(null, { message : "Spark Message Sent", event });
     });
 };
 
@@ -93,16 +93,16 @@ module.exports.tropoalert = (event, context, callback) => {
       }, function(err, res, body){
     if (err) {
       console.log("Error", err.message);
-      callback(err, { message: err.message }, { event });
+      callback(err, { message: err.message, event });
     }
       //Check for right status code
     if(res.statusCode !== 200){
         console.log('Invalid Status Code Returned:', res.statusCode);
-      callback(err, { message: "Tropo API Error " + res.statusCode }, { event });
+      callback(err, { message: "Tropo API Error " + res.statusCode, event });
     }
 
     //All is good. Print the body
     console.log("Status Code 200 - Tropo Received it");
-    callback(null, { message : "Tropo Call Sent" }, { event });
+    callback(null, { message : "Tropo Call Sent", event });
     });
 };
