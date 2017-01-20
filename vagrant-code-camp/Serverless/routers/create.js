@@ -28,6 +28,27 @@ module.exports.create = (event, context, callback) => {
     },
   };
 
+  // Push a SNS message for Security Scanning Pipeline
+  const sns = new AWS.SNS();
+  const accountId = '062829191412';
+
+  const snsparams = {
+    Message: JSON.stringify({
+          hostname: data.hostname,
+          ip: data.ip,
+          os: data.os,
+          version: data.version,
+          customer: data.customer,
+    }),
+    TopicArn: `arn:aws:sns:us-east-1:${accountId}:securityscan`,
+  };
+
+  sns.publish(snsparams, (error, data) => {
+    if (error) {
+      callback(error);
+    }
+  });
+
   // write the todo to the database
   dynamoDb.put(params, (error, result) => {
     // handle potential errors
@@ -40,7 +61,7 @@ module.exports.create = (event, context, callback) => {
     // create a response
     const response = {
       statusCode: 200,
-      body: JSON.stringify(result.Item),
+      body: JSON.stringify(result.Router),
     };
     callback(null, response);
   });

@@ -289,13 +289,13 @@ fruits:
 
 
 ---
-# Inventory 
+# Inventory - Simple Example
 - Group Name
 - Hostname (variable=value)
 
 ```yaml
 [routers]
-192.168.1.1 username=admin password=admin
+192.168.1.1
 ```
 ---
 # Inventory - Group Variables
@@ -315,6 +315,37 @@ interface=gi0/0
 [ROUTERS]
 Router1 ipaddress=192.168.1.2
 ```
+
+--- 
+# Template Files - Jinja2
+```jinja
+enable secret {{enable_password}}
+hostname {{inventory_hostname}}
+ip domain name {{domain}}
+aaa new-model
+username {{admin_user}} secret {{admin_password}}
+line vty 0 15
+logging synchronous
+transport input telnet ssh
+privilege level 15
+ntp server {{ntp_server}}
+```
+
+---
+# Playbooks - Templating playbook
+```yaml
+  - name: Build Router Templates
+    hosts: all
+    connection: local
+    gather_facts: no
+
+    tasks:
+      - name: Build Router configs
+        template:
+          src=templates/routers.j2
+          dest=configs/{{inventory_hostname}}.conf
+```
+
 ---
 # Playbook - Show Version
 ```yaml
@@ -340,34 +371,29 @@ tasks:
 ```
 
 ---
-# Playbooks - Templating playbook
-```yaml
-  - name: Build Router Templates
-    hosts: all
-    connection: local
-    gather_facts: no
-
-    tasks:
-      - name: Build Router configs
-        template:
-          src=templates/routers.j2
-          dest=configs/{{inventory_hostname}}.conf
-```
+# Playbooks Logic
+Can have 
+* loops
+* waits
+* when conditionals
+* if
 
 --- 
-# Template Files - Jinja2
-```jinja
-enable secret {{enable_password}}
-hostname {{inventory_hostname}}
-ip domain name {{domain}}
-aaa new-model
-username {{admin_user}} secret {{admin_password}}
-line vty 0 15
-logging synchronous
-transport input telnet ssh
-privilege level 15
-ntp server {{ntp_server}}
+# Playbooks - Roles
+example
+
+```YAML
+- hosts: routers
+  roles:
+     - common
+     - SSHOnly
+- hosts: oldrouters
+  roles:
+     - common
 ```
+Will pull from subfolders to build tasks
+* roles/common/tasks/main.yml
+* roles/SSHOnly/tasks/main.yml
 
 ---
 # IOS Update
@@ -465,6 +491,119 @@ ntp server {{ntp_server}}
 * Ansible is much more, and has 750+ modules. It will automate anything.
 * It is possible to live the Automated lifestyle now.
 
+---
+# Ideas Beyond the Cisco World
+---
+# M&CS Networking
+Modules for Logic Monitor - can discover networks and add them to Logic Monitor.
+
+```yaml
+#example of adding a list of hosts into monitoring
+
+tasks:
+  - name: Deploy LogicMonitor Host
+    # All tasks except for target=collector should use delegate_to: localhost
+    logicmonitor:
+      target: host
+      action: add
+      collector: mycompany-Collector
+      company: '{{ company }}'
+      user: '{{ user }}'
+      password: '{{ password }}'
+      groups: /servers/production,/datacenter1
+      properties:
+        snmp.community: secret
+        dc: 1
+        type: prod
+    delegate_to: localhost
+```
+
+---
+# Test the entire network
+
+#### Can everything ping what it needs? 
+#### Can all XX devices/branches reach critical services?
+```
+$ ansible cisco-devices -u cisco -m raw -a "traceroute 10.0.0.4"
+R1 | success | rc=0 >>
+
+Type escape sequence to abort.
+Tracing the route to 10.0.0.4
+VRF info: (vrf in name/id, vrf out name/id)
+  1 14.14.14.4 0 msec *  0 msec
+
+R2 | success | rc=0 >>
+
+Type escape sequence to abort.
+Tracing the route to 10.0.0.4
+VRF info: (vrf in name/id, vrf out name/id)
+  1 12.12.12.1 0 msec 0 msec 0 msec
+  2  *  *
+    14.14.14.4 0 msec
+
+R3 | success | rc=0 >>
+
+Type escape sequence to abort.
+Tracing the route to 10.0.0.4
+VRF info: (vrf in name/id, vrf out name/id)
+  1 34.34.34.4 0 msec 0 msec *
+
+R4 | success | rc=0 >>
+
+Type escape sequence to abort.
+Tracing the route to 10.0.0.4
+VRF info: (vrf in name/id, vrf out name/id)
+  1 10.0.0.4 0 msec 0 msec *
+```
+
+--- 
+### Vmware - Create VMWare Guests
+
+```yaml
+- vsphere_guest:
+    vcenter_hostname: vcenter.mydomain.local
+    username: myuser
+    password: mypass
+    guest: newvm001
+    state: powered_on
+    vm_extra_config:
+      vcpu.hotadd: yes
+      mem.hotadd:  yes
+      notes: This is a test VM
+      folder: MyFolder
+    vm_disk:
+      disk1:
+        size_gb: 10
+        type: thin
+        datastore: storage001
+    vm_nic:
+      nic1:
+        type: vmxnet3
+        network: VM Network
+        network_type: standard
+    vm_hardware:
+      memory_mb: 2048
+      num_cpus: 2
+      osid: centos64Guest
+      scsi: paravirtual
+      vm_cdrom:
+        type: "iso"
+        iso_path: "DatastoreName/cd-image.iso"
+    esxi:
+      datacenter: MyDatacenter
+      hostname: esx001.mydomain.local
+```
+---
+# Microsoft - Updates
+
+### Install all security, critical, and rollup updates
+```yaml
+- win_updates:
+    category_names:
+      - SecurityUpdates
+      - CriticalUpdates
+      - UpdateRollups
+```
 ---
 # Wrapping up
 - Experiment with Ansible

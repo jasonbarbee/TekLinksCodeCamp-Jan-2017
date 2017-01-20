@@ -33,8 +33,11 @@ Running a single instance in AWS EC2 instance for this lab.
 * Verital and Spacing is VERY important.
 
 * Open a text editor, and build a new file - called get-facts.yml
-* This file does not have any tasks, but it is a start.
+* This file does not have any tasks, but it is the base. 
+* It will need to be part of every file from now on.
 
+---
+# Ansible Playbook Header
 ```yaml
 ---
 - name: VyOS Gather Facts
@@ -98,7 +101,14 @@ Run it and see what the data looks like
 
 --- 
 # Send a message to Cisco Spark!
-Update your inventory file with your Spark Auth Token and your Customer Name. [^1]
+Update your inventory file with your Spark Auth Token and your Customer Name. 
+And Your Spark Room ID. You can find that by going to 
+https://web.ciscospark.com and signing in. Click on the Room you want to use.
+The RoomID will be at the end of the URL
+https://web.ciscospark.com/rooms/9f464a80-de51-11e6-a2af-2134341234/
+
+---
+# Ansible Spark module
 
 ```yaml
     - name: Cisco Spark - Text Message to a Room
@@ -109,8 +119,8 @@ Update your inventory file with your Spark Auth Token and your Customer Name. [^
         personal_token: "{{ bottoken }}"
         message: "Your Name : Found Device - {{ result.ansible_facts.ansible_net_hostname  }}"
 ```
-
-[^1]:This module is pending final committment to the next version, but I have loaded it on the Code Camp box.
+* Notice that we are using variables 
+* This module is pending final commit to the next version, but I have loaded it on the Code Camp box.
 
 ---
 # Backup configs and make a change

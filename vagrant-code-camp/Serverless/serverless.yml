@@ -15,9 +15,30 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+        - dynamodb:DescribeStream
+        - dynamodb:GetRecords
+        - dynamodb:GetShardIterator
+        - dynamodb:ListStreams
       Resource: "arn:aws:dynamodb:us-east-1:*:*"
+    - Effect: "Allow"
+      Action:
+        - "sns:*"
+      Resource: "*"
+
 
 functions:
+  securityscan:
+    handler: security.securityscan
+    events:
+      - sns: securityscan
+  sparkalert:
+    handler: security.sparkalert
+    events:
+      - sns: securityalert
+  tropoalert:
+    handler: security.tropoalert
+    events:
+      - sns: securityalert
   create:
     handler: routers/create.create
     events:
@@ -58,21 +79,24 @@ functions:
           method: delete
           cors: true
 
-resources:
-  Resources:
-    routersDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          -
-            AttributeName: id
-            AttributeType: S
-        KeySchema:
-          -
-            AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: 'routers'
+# resources:
+#   Resources:
+#     routersDynamoDbTable:
+#       Type: 'AWS::DynamoDB::Table'
+#       DeletionPolicy: Retain
+#       Properties:
+#         AttributeDefinitions:
+#           -
+#             AttributeName: id
+#             AttributeType: S
+#         KeySchema:
+#           -
+#             AttributeName: id
+#             KeyType: HASH
+#         ProvisionedThroughput:
+#           ReadCapacityUnits: 1
+#           WriteCapacityUnits: 1
+#         TableName: 'routers'
+
+# plugins:
+#   - serverless-offline
