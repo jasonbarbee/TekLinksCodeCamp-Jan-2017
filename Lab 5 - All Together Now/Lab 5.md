@@ -136,11 +136,37 @@ And if you entered your Phone number, a phone call from Tropo announcing this me
 ![inline 150%](images/spark-ansible.png)
 
 ---
-# Section 2 - AWS Only
+# Section 2 - AWS Only. Moderate Complexity.
  We're about to go all in on AWS now.
  We will not use Hook.io here.
  All the code we need has already been uploaded to Amazon.
  All the resources have been provisioned using AWS Cloud Formation and the Serverless.yml file
+
+## Make sure you have configured your .env file as in Lab 4. Instructions on the next slide
+
+---
+# AWS Serverless Variables
+Create a .env file if one does not exist, or modify it.
+
+ACCOUNT_ID is your AWS ID found in your AWS console under "My Account"
+BOTTOKEN is your Spark Authentication token
+SPARKROOM is the room you want to post to
+TROPOTOKEN is your outbound enabled Tropo account.
+
+Example next slide.
+
+---
+# Serverless .env Example 
+
+```yaml
+ACCOUNT_ID=
+BOTTOKEN=
+SPARKROOM=
+ADMINCELL=
+TROPOTOKEN=
+```
+
+If you modified any of this right now, do a "serverless deploy" to deploy all this to the cloud.
 
 ---
 # AWS Infrastructure Layout
@@ -175,7 +201,6 @@ Look over the code in the Serverless files.
   1. SecurityScan detected VyOS and pushed a new SNS message to SNS queue securityalert
   2. SecurityAlert sent a SNS message to securityalert
   2. The SNS on securityalert triggered our Spark and Tropo Lambda functions
-
 
 ---
 # End of Lab
