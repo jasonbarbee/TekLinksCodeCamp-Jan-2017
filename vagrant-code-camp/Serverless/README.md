@@ -1,17 +1,27 @@
-# Serverless REST API
+# Serverless REST API for Router Inventory and Security
 
-This example demonstrates how to setup a [RESTful Web Services](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) allowing you to create, list, get, update and delete Todos. DynamoDB is used to store the data. This is just an example and of course you could use any data storage as a backend.
+This example demonstrates how to setup a [RESTful Web Services](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) allowing you to create, list, get, update and delete routers. DynamoDB is used to store the data. This is just an example and of course you could use any data storage as a backend.
 
 ## Structure
 
-This service has a separate directory for all the todo operations. For each operation exactly one file exists e.g. `todos/delete.js`. In each of these files there is exactly one function which is directly attached to `module.exports`. In order for the Serverless framework to have access to these functions one `todos/index.js` exists which is importing and than exporting all the operations as one module.
+This service has a separate directory for all the router operations. For each operation exactly one file exists e.g. `routers/delete.js`. In each of these files there is exactly one function which is directly attached to `module.exports`. In order for the Serverless framework to have access to these functions one `routers/index.js` exists which is importing and than exporting all the operations as one module.
 
-The idea behind the `todos` directory is that in case you want to create a service containing multiple resources e.g. users, notes, comments you could do so in the same service. While this is certainly possible you might consider creating a separate service for each resource. It depends on the use-case and your preference.
+The idea behind the `routers` directory is that in case you want to create a service containing multiple resources e.g. users, notes, comments you could do so in the same service. While this is certainly possible you might consider creating a separate service for each resource. It depends on the use-case and your preference.
 
-## Use-cases
 
-- API for a Web Application
-- API for a Mobile Application
+## Credentials
+create a .env file with information relevant to AWS, Spark and Tropo
+ACCOUNT_ID=
+BOTTOKEN=
+SPARKROOM=
+ADMINCELL=
+TROPOTOKEN=
+
+ACCOUNT_ID is your AWS ID found in your AWS console under "My Account"
+BOTTOKEN is your Spark Authentication token
+SPARKROOM is the room you want to post to
+TROPOTOKEN is your outbound enabled Tropo account.
+ADMINCELL is your cell phone Tropo will call.
 
 ## Setup
 
@@ -44,11 +54,11 @@ region: us-east-1
 api keys:
   None
 endpoints:
-  POST - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/todos
-  GET - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/todos
-  GET - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/todos/{id}
-  PUT - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/todos/{id}
-  DELETE - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/todos/{id}
+  POST - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/routers
+  GET - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/routers
+  GET - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/routers/{id}
+  PUT - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/routers/{id}
+  DELETE - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/routers/{id}
 functions:
   serverless-rest-api-with-dynamodb-dev-update: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-dynamodb-dev-update
   serverless-rest-api-with-dynamodb-dev-get: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-dynamodb-dev-get
@@ -59,73 +69,58 @@ functions:
 
 ## Usage
 
-You can create, retrieve, update, or delete todos with the following commands:
+You can create, retrieve, update, or delete routers with the following commands:
 
-### Create a Todo
+### Create a router
+
+POST https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/routers 
+{
+    "customer" : "Jason",
+    "ip" : "1.1.1.1",
+    "os" : "VyOS",
+    "hostname" : "VyOS Router",
+    "version" : "12.2",
+    "securitycheck" : "true"
+}
+
+No output
+
+### List all routers
 
 ```bash
-curl -X POST https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/todos --data '{ "text": "Learn Serverless" }'
+curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/routers
+```
+
+### Get one Router
+
+```bash
+# Replace the <id> part with a real id from your routers table
+curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/routers/<id>
+```
+
+
+### Update a router
+
+
+# Replace the <id> part with a real id from your routers table
+PUT https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/routers/<id> 
+{
+    "customer" : "Jason",
+    "ip" : "1.1.1.1",
+    "os" : "VyOS",
+    "hostname" : "VyOS Router",
+    "version" : "12.2",
+    "securitycheck" : "true"
+}
+
+No output
+
+### Delete a router
+
+```bash
+# Replace the <id> part with a real id from your routers table
+curl -X DELETE https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/routers/<id>
 ```
 
 No output
 
-### List all Todos
-
-```bash
-curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/todos
-```
-
-Example output:
-```bash
-[{"text":"Deploy my first service","id":"ac90fe80-aa83-11e6-9ede-afdfa051af86","checked":true,"updatedAt":1479139961304},{"text":"Learn Serverless","id":"20679390-aa85-11e6-9ede-afdfa051af86","createdAt":1479139943241,"checked":false,"updatedAt":1479139943241}]%
-```
-
-### Get one Todo
-
-```bash
-# Replace the <id> part with a real id from your todos table
-curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/todos/<id>
-```
-
-Example Result:
-```bash
-{"text":"Learn Serverless","id":"ee6490d0-aa81-11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":false,"updatedAt":1479138570824}%
-```
-
-### Update a Todo
-
-```bash
-# Replace the <id> part with a real id from your todos table
-curl -X PUT https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/todos/<id> --data '{ "text": "Learn Serverless", "checked": true }'
-```
-
-No output
-
-### Delete a Todo
-
-```bash
-# Replace the <id> part with a real id from your todos table
-curl -X DELETE https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/todos/<id>
-```
-
-No output
-
-## Scaling
-
-### AWS Lambda
-
-By default, AWS Lambda limits the total concurrent executions across all functions within a given region to 100. The default limit is a safety limit that protects you from costs due to potential runaway or recursive functions during initial development and testing. To increase this limit above the default, follow the steps in [To request a limit increase for concurrent executions](http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html#increase-concurrent-executions-limit).
-
-### DynamoDB
-
-When you create a table, you specify how much provisioned throughput capacity you want to reserve for reads and writes. DynamoDB will reserve the necessary resources to meet your throughput needs while ensuring consistent, low-latency performance. You can change the provisioned throughput and increasing or decreasing capacity as needed.
-
-This is can be done via settings in the `serverless.yml`.
-
-```yaml
-  ProvisionedThroughput:
-    ReadCapacityUnits: 1
-    WriteCapacityUnits: 1
-```
-
-In case you expect a lot of traffic fluctuation we recommend to checkout this guide on how to auto scale DynamoDB [https://aws.amazon.com/blogs/aws/auto-scale-dynamodb-with-dynamic-dynamodb/](https://aws.amazon.com/blogs/aws/auto-scale-dynamodb-with-dynamic-dynamodb/)

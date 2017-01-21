@@ -28,15 +28,15 @@ provider:
 
 functions:
   securityscan:
-    handler: security.securityscan
+    handler: securityhandler.securityscan
     events:
       - sns: securityscan
   sparkalert:
-    handler: security.sparkalert
+    handler: securityhandler.sparkalert
     events:
       - sns: securityalert
   tropoalert:
-    handler: security.tropoalert
+    handler: securityhandler.tropoalert
     events:
       - sns: securityalert
   create:
@@ -79,24 +79,24 @@ functions:
           method: delete
           cors: true
 
-resources:
-  Resources:
-    routersDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          -
-            AttributeName: id
-            AttributeType: S
-        KeySchema:
-          -
-            AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: 'routers'
+# resources:
+#   Resources:
+#     routersDynamoDbTable:
+#       Type: 'AWS::DynamoDB::Table'
+#       DeletionPolicy: Retain
+#       Properties:
+#         AttributeDefinitions:
+#           -
+#             AttributeName: id
+#             AttributeType: S
+#         KeySchema:
+#           -
+#             AttributeName: id
+#             KeyType: HASH
+#         ProvisionedThroughput:
+#           ReadCapacityUnits: 1
+#           WriteCapacityUnits: 1
+#         TableName: 'routers'
 
 # plugins:
 #   - serverless-offline

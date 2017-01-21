@@ -152,6 +152,7 @@ ACCOUNT_ID is your AWS ID found in your AWS console under "My Account"
 BOTTOKEN is your Spark Authentication token
 SPARKROOM is the room you want to post to
 TROPOTOKEN is your outbound enabled Tropo account.
+ADMINCELL is your cell phone Tropo will call.
 
 Example next slide.
 
