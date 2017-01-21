@@ -2,7 +2,7 @@ footer: TekLinks Code Camp
 slidenumbers: true
 autoscale: true
 
-![inline](images/teklinks.png)
+![left inline](images/teklinks.png)
 Code Camp
 ==
 
@@ -29,12 +29,17 @@ Using VyOS - Vyatta - open source free router similar to Cisco.
 Running a single instance in AWS EC2 instance for this lab.
 
 ---
-# Start building a playbook
-* Verital and Spacing is VERY important.
+# Playbooks pre-built
+### All the playbooks you need are pre-built
 
-* Open a text editor, and build a new file - called get-facts.yml
-* This file does not have any tasks, but it is the base. 
-* It will need to be part of every file from now on.
+* aws-facts.yml - Collects Data from AWS.
+* security-alert.yml - Security Alert Code to push to hook.io
+* vyos-scan.yml - Show version, if VyOS Then Security Alert
+* vyos-config.yml - Changes Hostname and backups config file.
+* vyos-spark.yml - Show version and pops a Spark Message
+
+---
+# Learning Ansible Syntax
 
 ---
 # Ansible Playbook Header
@@ -76,7 +81,7 @@ The second debug prints the array of data that the first task gathered.
 # Basic Ansible Fact Gathering
 
 ```bash
-ansible-playbook -i inventory get-facts.yml
+ansible-playbook -i inventory vyos-facts.yml
 ```
 ### You should get ansible output from a test Vyatta router running in AWS EC2 Instance.
 
@@ -92,11 +97,14 @@ Add a task to the bottom to show version.
         commands:
           - show version
         provider: "{{ cli }}"
- ```
+```
+
+---
+# Running Show Version
 Run it and see what the data looks like
 
  ```yaml
- ansible-playbook -i inventory get-facts.yml
+ ansible-playbook -i inventory vyos-facts.yml
  ```
 
 --- 
@@ -104,8 +112,9 @@ Run it and see what the data looks like
 Update your inventory file with your Spark Auth Token and your Customer Name. 
 And Your Spark Room ID. You can find that by going to 
 https://web.ciscospark.com and signing in. Click on the Room you want to use.
-The RoomID will be at the end of the URL
+The RoomID will be the string at the end of the URL - like this
 https://web.ciscospark.com/rooms/9f464a80-de51-11e6-a2af-2134341234/
+Only grab the numbers - not the entire URL.
 
 ---
 # Ansible Spark module
@@ -122,10 +131,16 @@ https://web.ciscospark.com/rooms/9f464a80-de51-11e6-a2af-2134341234/
 * Notice that we are using variables 
 * This module is pending final commit to the next version, but I have loaded it on the Code Camp box.
 
+--- 
+# Try the Spark module
+
+```yaml
+ ansible-playbook -i inventory vyos-spark.yml
+ ```
+
 ---
 # Backup configs and make a change
-This is a good time to make a new file, copy the header and provider variables, then use this as your task.
-Name it backup-change.yml and try to run it.
+Example Task
 
 ```yaml
     - name: backup and load config commands from vyos.cfg
@@ -142,18 +157,20 @@ Name it backup-change.yml and try to run it.
         provider: "{{ cli }}"
 
 ```
+
 ---
-Ansible can play with AWS too...
+# Run the Configure/backup Script 
+
+```yaml
+ ansible-playbook -i inventory vyos-config.yml
+ ```
+
+---
+# Ansible can play with AWS too...
 
 ---
 # AWS - Basic EC2 Inventory List
-
-A user linked to my account credentials are included in the repo. 
-Run
-<br>
-```ansible-playbook -i inventory aws-facts.yml``` 
-<br>
-to see my AWS inventory running for this Lab.
+Here's example model for EC2
 
 ```yaml
 - name: Gather EC2 facts
@@ -167,6 +184,14 @@ to see my AWS inventory running for this Lab.
       debug:
         msg: "{{ ec2_facts }}"
 ```
+---
+# Ansible EC2 Inventory List
+* I have included credentials for this excersize in my aws-facts.yml file.
+* To try this out run
+<br>
+```ansible-playbook -i inventory aws-facts.yml``` 
+<br>
+to see my AWS inventory running for this Lab.
 
 ---
 # Followup Resources

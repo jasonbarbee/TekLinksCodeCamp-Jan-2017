@@ -45,9 +45,9 @@ Click Create MicroService at the top navigation bar. - Call it **sparklogger**
 # Copy Spark Logging Code
 Copy ```sparklogger.js``` (in the Lab 4 Serverless Folder)
 Paste/Save the content into a new hook at Hook.io called "sparklogger")
-Your Hook.io URL for should looke like this
+Your Hook.io URL will be like this
 
-https://hook.io/jasonbarbee/sparklogger
+https://hook.io/yourUserName/sparklogger
 
 It requires these parameters
 
@@ -106,7 +106,7 @@ it should post our message...
 ---
 # Making a useful API
 Let's make an API that creates,updates,deletes a router inventory.
-We will use AWS API Gateway, AWS DynamoDB, and AWS Lambda.
+We will use AWS API Gateway, AWS DynamoDB, AWS Simple Notification Services (SNS) and AWS Lambda.
 
 And some Serverless Framework Magic.
 
@@ -129,7 +129,7 @@ This lab is designed to be run inside the Vagrant profile provided in the Code C
 Make sure you have 
 CD to the vagrant-code-camp folder and run
 "vagrant ssh" to access the Vagrant VM.
-This Lab 4 is designed to run inside the Serverless Folder within that.
+This Lab 4 is designed to run inside the Serverless Folder within the Vagrant Folder.
 
 ---
 # Give Severless AWS Access
@@ -197,7 +197,8 @@ Use the POST/ method - click TEST, and use this as a template the body
     "ip" : "1.1.1.1",
     "os" : "VyOS",
     "hostname": "VyOS Router",
-    "version": "12.2"
+    "version": "12.2",
+    "securitycheck": "false"
 }
 ```
 
@@ -211,14 +212,14 @@ Let's add a router to the database using Ansible.
 
 ---
 # Build an Ansible Playbook
-Use the template "aws-inventory.yml" under the Vagrant/Ansible folder.
-We use a method called URI to POST data to a URL after collecting the inventory.
+You can use the file  "aws-inventory.yml" under the Vagrant/Ansible folder.
+We use a built in Ansible module called URI to POST data to a URL after collecting the inventory.
 **make sure to change this line in aws-inventory.yml**
 url: "https://3snrpqj7tj.execute-api.us-east-1.amazonaws.com/dev/routers"
 to **YOUR URL** reported by Serverless so that the data gets posted to YOUR API (not mine)
 
 ---
-# Ansible AWS Tasks
+# Ansible AWS Tasks - Example
 
 ```yaml
   tasks:
@@ -237,7 +238,8 @@ to **YOUR URL** reported by Serverless so that the data gets posted to YOUR API 
             "ip" : "{{ inventory_hostname }}", 
             "version" : "{{ result.ansible_facts.ansible_net_version }}", 
             "hostname" : "{{ result.ansible_facts.ansible_net_hostname  }}", 
-            "customer" : "{{ customername }}"
+            "customer" : "{{ customername }}",
+            "securitycheck" : "false"
             }'
         body_format: json
         validate_certs: no
@@ -256,5 +258,5 @@ Caution if you run Ansible more than once, it will upload duplicates.
 If you feel like rewriting some code to prevent that - go for it.
 
 ---
-# End of Lab
+# End of Lab 4
 ## Thanks!

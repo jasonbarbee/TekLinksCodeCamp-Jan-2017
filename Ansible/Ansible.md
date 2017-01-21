@@ -154,7 +154,7 @@ Agenda
 # Real world stuff
 * Security Audit Remediation
   * Update the IOS
-  * Disable tetlnet, generate keys, turn on SSH, disable http, ssh version 2... 
+  * Disable telnet, generate keys, turn on SSH, disable http, ssh version 2... 
   * ACL standardization
 
 ---

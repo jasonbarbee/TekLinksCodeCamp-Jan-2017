@@ -25,23 +25,10 @@
         var: result.ansible_facts
 
     - include: security-alert.yml
-      when: result.ansible_facts.ansible_net_version == "VzOS"
+      when: result.ansible_facts.ansible_net_version == "VyOS"
 
     - name: Show version
       vyos_command:
         commands:
           - show version
-        provider: "{{ cli }}"
-
-    - name: configure the remote device
-      vyos_config:
-        backup: yes
-        lines:
-          - set system host-name AWS-CodeCamp
-        provider: "{{ cli }}"
-
-    - name: backup and load from file
-      vyos_config:
-        src: vyos.cfg
-        backup: yes
         provider: "{{ cli }}"

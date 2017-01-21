@@ -26,9 +26,11 @@
         HEADER_Content-Type: application/json
         body: '{ 
             "ip" : "{{ inventory_hostname }}", 
+            "os" : "{{ result.ansible_facts.ansible_net_version }}",
             "version" : "{{ result.ansible_facts.ansible_net_version }}", 
             "hostname" : "{{ result.ansible_facts.ansible_net_hostname  }}", 
-            "customer" : "{{ customername }}"
+            "customer" : "{{ customername }}",
+            "securitycheck" : "true"
             }'
         body_format: json
         validate_certs: no

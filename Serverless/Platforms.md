@@ -130,7 +130,7 @@ Agenda
 
 ---
 # Function-As-A-Service
-* Function as a Service to run small units of code on on requests or evenets
+* Function as a Service to run small units of code on requests or events
 * Read or Write to a database.
 * Call a Spark Log
 * Call a payment processing and return a value.

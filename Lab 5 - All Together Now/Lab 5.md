@@ -10,8 +10,7 @@ Solutions Architect
 CCIE #18039
 
 ---
-Agenda
-==
+# Section 1 - Micro-Service 101
 
 1. Add a Hook.io that will:
   1. Send data to Spark
@@ -55,7 +54,7 @@ It requires these parameters
 
 ---
 # Update your inventory keys and Phone Number
-Update your Ansible inventory file with your tokens
+**Update your Ansible inventory file with YOUR tokens**
 
 ```yaml
 [AWS-Routers]
@@ -72,11 +71,13 @@ roomid="Y2lzY29zcGFyazovL3VzL1JPT00vYWI4NTk1YjAtY2M3NC0xMWU2LWJkMjUtZDU5Y2U3ZjUx
 numbertocall="yourcell"
 customername="Example Customer"
 ```
-Do not change the Roomid. The roomid key already points to the TekLinks Spark Code Camp Room.
+The roomid key already points to the TekLinks Spark Code Camp Room, you can change it to your own room key.
 
 ---
-# Ansible - Call a conditional Task
+# Ansible - Call a conditional Task - Reference
 ### We will use include/when to match conditions in Ansible.
+### This is reference only, the code is ready for you to run as aws-scan.yml
+
 ```yaml
     - name: collect all facts from the device
       vyos_facts:
@@ -92,7 +93,7 @@ Do not change the Roomid. The roomid key already points to the TekLinks Spark Co
       when: result.ansible_facts.ansible_net_version == "VyOS"
 ```
 ---
-# Conditional Tasks
+# Reference - Conditional Tasks
 * security-alert.yml contents will be included ONLY when the facts show that the device is a VyOS model
 
 * We registered the results to a variable called result, then checked a field in the result if it contained VyOS.
@@ -100,7 +101,8 @@ Do not change the Roomid. The roomid key already points to the TekLinks Spark Co
 * The include statement just includes the file if that is true, as if we had typed the contents of security-alert.yml into the parent file.
 
 ---
-# Security Alert Task
+# Reference - Security Alert Task
+
 ```yaml
 ---
     - name: Security Alert
@@ -127,10 +129,53 @@ Do not change the Roomid. The roomid key already points to the TekLinks Spark Co
 ---
 # Run Ansible and see if it works!
 
-```ansible-playbook -i inventory security-test.yml```
+```ansible-playbook -i inventory vyos-scan.yml```
+
 You should get a Spark message in the Code Camp Room
 And if you entered your Phone number, a phone call from Tropo announcing this message.
 ![inline 150%](images/spark-ansible.png)
+
+---
+# Section 2 - AWS Only
+ We're about to go all in on AWS now.
+ We will not use Hook.io here.
+ All the code we need has already been uploaded to Amazon.
+ All the resources have been provisioned using AWS Cloud Formation and the Serverless.yml file
+
+---
+# AWS Infrastructure Layout
+![inline](images/aws-codecamp.png)
+
+---
+# AWS
+Look over the code in the Serverless files.
+
+---
+# AWS Walkthrough
+![inline fit](images/aws-codecamp-walkthrough.png)
+
+---
+# Ansible command to kick off the magic
+
+```ansible-playbook -i inventory aws-scan.yml```
+* Make sure your inventory file contains your credentials.
+
+---
+# Actions
+1. Ansible scans the network
+  1. Ansible found a Vyatta Routers
+  1. Ansible triggered a POST to AWS API.
+2. AWS wrote to the database.
+  1. AWS Lambda put a message on the newitem SNS
+  1. Newitem SNS triggered a Lambda securityscan function
+(cont'd)
+---
+# Actions 2
+  1. NewItem SNS triggered SecurityScan lambda
+  1. SecurityScan detected VyOS and pushed a new SNS message to SNS queue securityalert
+  2. SecurityAlert sent a SNS message to securityalert
+  2. The SNS on securityalert triggered our Spark and Tropo Lambda functions
+
 
 ---
 # End of Lab
