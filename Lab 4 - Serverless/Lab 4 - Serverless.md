@@ -40,10 +40,9 @@ Click Create MicroService at the top navigation bar. - Call it **sparklogger**
 
 ![inline fit](images/hook-new.png)
 
-
 ---
 # Copy Spark Logging Code
-Copy ```sparklogger.js``` (in the Lab 4 Serverless Folder)
+Copy ```hook-io-sparklogger.js``` (in the Code)
 Paste/Save the content into a new hook at Hook.io called "sparklogger")
 Your Hook.io URL will be like this
 
@@ -102,6 +101,13 @@ https://hook.io/jasonbarbee/sparklogger
 with parameters bottoken, roomid, message
 it should post our message...
 ![inline 90%](images/postman-spark.png)![inline 90%](images/spark-success.png)
+
+---
+# BONUS: Add a Hook to Call Tropo too
+You can create a new hook called securityalert
+copy hook-io-securityalert.js as the contents of this hook.
+See if you can figure out the hooks required from looking at the code!
+
 
 ---
 # Making a useful API

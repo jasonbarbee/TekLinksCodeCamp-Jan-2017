@@ -4,8 +4,7 @@ autoscale: true
 
 ![left inline](images/teklinks.png)
 # Code Camp
-## Ansible Introduction
-
+## Environment Setup
 
 
 Jason Barbee
@@ -25,14 +24,16 @@ Agenda
 https://github.com/jasonbarbee/TekLinksCodeCamp-Jan-2017 
 
 ![inline](images/github-download.png)
+
 ---
-# Virtual and Vagrant
+# Next Next Next
 * Download Vagrant and install - https://www.vagrantup.com/downloads.html
 * Download Virtualbox and install https://www.virtualbox.org/wiki/Downloads
 * Visual Studio Code https://code.visualstudio.com/download
+* Postman https://www.getpostman.com
 
 ----
-Launch Code Camp Virtualbox Installer
+# Launch Code Camp Virtualbox Installer
 * Unzip the Github Repo
 * Open a shell and cd to the ```vagrant-code-camp``` folder
 * Issue command ```vagrant up```. give it 10-20 minutes. 
@@ -59,3 +60,6 @@ Some recommendations
 * Code Spellchecker
 * beautify
 
+---
+# We will start Presentations at 9:30am.
+Thanks!

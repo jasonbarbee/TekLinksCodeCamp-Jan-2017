@@ -62,13 +62,13 @@ It requires these parameters
 
 [AWS-Routers:vars]
 username="codecamp"
-password="bettertogether"
+password="put a password here"
 
 [all:vars]
 hookname="yourusername"
 bottoken="yourSparkUserAuthenticationToken"
 roomid="Y2lzY29zcGFyazovL3VzL1JPT00vYWI4NTk1YjAtY2M3NC0xMWU2LWJkMjUtZDU5Y2U3ZjUxOTE5"
-numbertocall="yourcell"
+numbertocall="+1yourcell"
 customername="Example Customer"
 ```
 The roomid key already points to the TekLinks Spark Code Camp Room, you can change it to your own room key.
