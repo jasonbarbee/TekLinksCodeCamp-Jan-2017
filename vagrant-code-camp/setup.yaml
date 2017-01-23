@@ -17,6 +17,11 @@
     shell: apt-get update
     sudo: true
 
+    # Install Ansible     
+  - name: Install Ansible via NPM
+    shell: apt-get -y install ansible
+    sudo: true
+
   - name: Install python and node
     apt: pkg={{item}} state=installed
     sudo: true
@@ -43,6 +48,10 @@
     shell: ln -sf /usr/bin/nodejs /usr/bin/node
     sudo: true
 
+  - name: Install Serverless framework
+    shell: npm install -g serverless
+    sudo: true
+    
     # Install Loopback via root 
 #  - name: Install Loopback via NPM this will take 10-20 minutes
 #    shell: npm install -g strongloop
@@ -67,12 +76,6 @@
     # Install NTC Repo, git module was broken at time.      
   - name: Clone NTC-Ansible
     shell: git clone https://github.com/networktocode/ntc-ansible --recursive /usr/share/ansible/ntc-ansible
-    sudo: true
-
-
-    # Install Ansible     
-  - name: Install Ansible via NPM
-    shell: apt-get -y upgrade ansible
     sudo: true
 
     # Install Ansible Spark Module, git module was broken at time.      
@@ -103,10 +106,11 @@
 
   - name: Fix missing ssh known host file - ansible crashed without it
     shell: echo "" >> /home/vagrant/.ssh/known_hosts
-
+    sudo: true
   - name: Fix missing ssh known host file - ansible crashed without it
     shell: chown vagrant /home/vagrant/.ssh/known_hosts
-    
+    sudo: true 
+
     # Fix a temporary issue with PyNTC library which ntc-ansible depends on.
   - name: Rename NTC files 
     shell: mv /usr/share/ansible/ntc-ansible/setup.py /usr/share/ansible/ntc-ansible/oldsetup.py
@@ -122,8 +126,6 @@
     shell: mv /usr/share/ansible/ntc-ansible/ntc-templates/setup.py /usr/share/ansible/ntc-ansible/ntc-templates/oldsetup.py
     sudo: true
 
-  - name: Install Serverless framework
-    shell: apt-get install serverless -g
-    sudo: true
+
 
 

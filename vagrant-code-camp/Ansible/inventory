@@ -3,12 +3,12 @@
 
 [AWS-Routers:vars]
 username="codecamp"
-password=“”
+password=""
 
 [all:vars]
 hookname="yourusername"
 bottoken="yourSparkUserAuthenticationToken"
 roomid="Y2lzY29zcGFyazovL3VzL1JPT00vYWI4NTk1YjAtY2M3NC0xMWU2LWJkMjUtZDU5Y2U3ZjUxOTE5"
-numbertocall=“+1yourcell"
+numbertocall=“1yourcell"
 customername="Example Customer"
 tropotoken=‘yourcooltropotoken’
