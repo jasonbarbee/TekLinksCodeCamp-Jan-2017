@@ -99,4 +99,4 @@ functions:
 #         TableName: 'routers'
 
 # plugins:
-#   - serverless-offline
+#   - serverless-webpack
