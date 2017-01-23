@@ -61,5 +61,12 @@ Some recommendations
 * beautify
 
 ---
+Create a TekLinks AWS Account if you don't have one.
+We will be using S3, API Gateway, Lambda, and CloudFormation.
+It will be free if you are in the 1 year Free Tier. If not, most all the services are still free.
+API Gateway is not in post 1 year free tier, but costs should be pennies.
+It should be impossible to spend more than the cost cup of coffee these 2 days.
+
+---
 # We will start Presentations at 9:30am.
 Thanks!

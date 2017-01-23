@@ -9,6 +9,7 @@ password=""
 hookname="yourusername"
 bottoken="yourSparkUserAuthenticationToken"
 roomid="Y2lzY29zcGFyazovL3VzL1JPT00vYWI4NTk1YjAtY2M3NC0xMWU2LWJkMjUtZDU5Y2U3ZjUxOTE5"
-numbertocall=“1yourcell"
+# NO QUOTES AROUND CELL - breaks stuff.
+numbertocall=1yourcell
 customername="Example Customer"
 tropotoken=‘yourcooltropotoken’

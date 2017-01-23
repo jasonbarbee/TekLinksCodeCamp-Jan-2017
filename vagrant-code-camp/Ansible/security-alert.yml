@@ -1,22 +1,11 @@
 ---
-    - name: Security Alert
-      shell: echo "SECURITY ALERT!"
-
-    - name: Alert the NOC Team
+    - name: Alert the NOC Team about rogue VyOS
       uri:
         url: "https://hook.io/{{ hookname }}/securityalert"
         method: POST
         HEADER_Content-Type: application/json
-        body: '{ 
-          "bottoken" : "{{ bottoken }}", 
-          "hookname" : "{{ hookname }}", 
-          "ip" : "{{ inventory_hostname }}", 
-          "version" : "{{ result.ansible_facts.ansible_net_version }}", 
-          "hostname" : "{{ result.ansible_facts.ansible_net_hostname  }}", 
-          "roomid" : "{{ roomid }}", 
-          "numbertocall" : "{{ numbertocall }}", 
-          "customername" : "{{ customername }}",
-          "tropotoken" : "{{ tropotoken }}"
-          }'
+        body: '{{ post|to_json }}'
         body_format: json
         validate_certs: no
+        status_code: 200
+        return_content: yes

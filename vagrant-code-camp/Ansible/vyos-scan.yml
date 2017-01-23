@@ -4,6 +4,16 @@
   connection: local
 
   vars:
+    post:
+      bottoken : "{{ bottoken }}"
+      hookname : "{{ hookname }}"
+      ip : "{{ inventory_hostname }}"
+      version : "{{ result.ansible_facts.ansible_net_version }}"
+      hostname : "{{ result.ansible_facts.ansible_net_hostname  }}"
+      roomid : "{{ roomid }}"
+      numbertocall : "{{ numbertocall }}" 
+      customername : "{{ customername }}"
+      tropotoken : "{{ tropotoken }}"
     version: ""
     ansible_net_version: ""
     cli:
