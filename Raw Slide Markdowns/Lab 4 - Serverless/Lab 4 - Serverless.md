@@ -106,11 +106,11 @@ it should post our message...
 # BONUS: Add a Hook to Call Tropo too
 You can create a new hook called securityalert
 copy hook-io-securityalert.js as the contents of this hook.
-See if you can figure out the hooks required from looking at the code!
-
+(It is fully functional.)
+See if you can figure out the hooks required from looking at the code, and use Postman to trigger it.
 
 ---
-# Making a useful API
+# Making a RESTful API
 Let's make an API that creates,updates,deletes a router inventory.
 We will use AWS API Gateway, AWS DynamoDB, AWS Simple Notification Services (SNS) and AWS Lambda.
 
@@ -195,7 +195,8 @@ We also get a stack trace of the console logs that happened during the method.
 
 ---
 # POST a Router manually
-Use the POST/ method - click TEST, and use this as a template the body
+Use Postman to send example data
+the POST/ method - click TEST, and use this as a template the body
 
 ```json
 {

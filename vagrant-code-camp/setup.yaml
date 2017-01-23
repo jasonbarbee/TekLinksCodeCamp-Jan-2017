@@ -44,9 +44,9 @@
     sudo: true
 
     # Install Loopback via root 
-  - name: Install Loopback via NPM this will take 10-20 minutes
-    shell: npm install -g strongloop
-    sudo: true
+#  - name: Install Loopback via NPM this will take 10-20 minutes
+#    shell: npm install -g strongloop
+#    sudo: true
 
 #    # Install Loopback and Node
 #  - npm:
@@ -72,9 +72,9 @@
 
     # Install Ansible     
   - name: Install Ansible via NPM
-    shell: apt-get -y update ansible
+    shell: apt-get -y upgrade ansible
     sudo: true
-    
+
     # Install Ansible Spark Module, git module was broken at time.      
   - name: Clone Ansible Cisco Spark Module
     shell: sudo wget https://raw.githubusercontent.com/drew-russell/ansible/610dc9993cbcd15bf7e5e7771090debb55f1ec76/lib/ansible/modules/notification/cisco_spark.py  -O /usr/lib/python2.7/dist-packages/ansible/modules/extras/notification/cisco_spark.py
