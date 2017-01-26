@@ -1,5 +1,5 @@
-# TekLinks Code Camp Q1 2017 Notes
-Presenters Jason Barbee and Jeremy Sanders
+# TekLinks Code Camp Q1 2017
+Presenters Jason Barbee (jasonbarbee ) and Jeremy Sanders ( jeremypng )
 
 # Prep 
 * Download Vagrant and install - https://www.vagrantup.com/downloads.html
