@@ -1,4 +1,4 @@
-var roomID="<INSERT YOUR ROOM KEY HERE";
+var roomID="INSERT YOUR ROOM KEY HERE";
 var token="INSERT YOUR BEARER TOKEN HERE";
 var awsAccessKey="INSERT YOUR AWS IAM USER ACCESS KEY HERE";
 var awsAccessSecret="INSERT YOUR AWS IAM SECRET KEY HERE";
@@ -179,14 +179,13 @@ if (callLeg=="inbound") {
                         recordPassword: awsAccessSecret,
                         recordUser: awsAccessKey,
                         terminator: "#",
-                        transcriptionOutURI: tropoTokenURL & "&callLeg=transcription",
+                        transcriptionOutURI: tropoTokenURL + "&callLeg=transcription",
                         transcriptionID: currentCall.callerID,
                         onError: function(event) {
                             say("error with recording");
                         },
                         onRecord: function(event) {
-                            var recResult="newticket";
-                            info("Caller " + currentCall.callerID + " message recording", awsS3BucketURL + currentCall.callerID + "-" + recResult + "-" + timecode + ".mp3");
+                            info("Caller " + currentCall.callerID + " message recording", awsS3BucketURL + currentCall.callerID + "-newticket-" + timecode + ".mp3");
                         }
                     });
 
@@ -208,14 +207,13 @@ if (callLeg=="inbound") {
                                 recordPassword: awsAccessSecret,
                                 recordUser: awsAccessKey,
                                 terminator: "#",
-                                transcriptionOutURI: tropoTokenURL & "&callLeg=transcription",
+                                transcriptionOutURI: tropoTokenURL + "&callLeg=transcription",
                                 transcriptionID: currentCall.callerID,
                                 onError: function(event) {
                                     say("error with recording");
                                 },
                                 onRecord: function(event) {
-                                    var recResult="customerservice";
-                                    info("Caller " + currentCall.callerID + " message recording", awsS3BucketURL + currentCall.callerID + "-" + recResult + "-" + timecode + ".mp3");
+                                    info("Caller " + currentCall.callerID + " message recording", awsS3BucketURL + currentCall.callerID + "-customerservice-" + timecode + ".mp3");
                                 }
                             });
                         }
