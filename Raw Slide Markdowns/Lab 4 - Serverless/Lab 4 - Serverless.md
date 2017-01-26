@@ -102,12 +102,6 @@ with parameters bottoken, roomid, message
 it should post our message...
 ![inline 90%](images/postman-spark.png)![inline 90%](images/spark-success.png)
 
----
-# BONUS: Add a Hook to Call Tropo too
-You can create a new hook called securityalert
-copy hook-io-securityalert.js as the contents of this hook.
-(It is fully functional.)
-See if you can figure out the hooks required from looking at the code, and use Postman to trigger it.
 
 ---
 # Making a RESTful API

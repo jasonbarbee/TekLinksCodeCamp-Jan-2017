@@ -21,7 +21,7 @@ Agenda
 
 ---
 # Download Code Repository
-https://github.com/jasonbarbee/TekLinksCodeCamp-Jan-2017 
+### https://github.com/jasonbarbee/TekLinksCodeCamp-Jan-2017 
 
 ![inline](images/github-download.png)
 
@@ -41,26 +41,28 @@ https://github.com/jasonbarbee/TekLinksCodeCamp-Jan-2017
 
 ---
 # Vagrant Usage
-
-```Vagrant ssh`` - connects to your VM Shell
+```Vagrant up``` - boots up the VM
+```Vagrant ssh``` - connects to your VM Shell
 ```Vagrant down``` - shutdown the virtualbox
 ```Vagrant destroy``` - removes the virtual machine
 
 ---
 # Vagrant Shared folder
-Vagrant maps a shared folder within the VM you can access /vagrant to access the "vagrant-code-camp" folder
+Vagrant maps a shared folder within the VM you can access.
+Use /vagrant to access the "vagrant-code-camp" folder
 
 ---
 # Setup VS Code ( Optional )
 Install a few extensions
 Within VS Code choose "View -> Extensions" or click the Extensions icon on the left tree.
 Some recommendations
-* vscode-icons
-* ESHint or jshunt
+* vscode-icons - 
+* ESLint or jshint (Linting Tool)
 * Code Spellchecker
 * beautify
 
 ---
+# AWS Setup
 Create a TekLinks AWS Account if you don't have one.
 We will be using S3, API Gateway, Lambda, and CloudFormation.
 It will be free if you are in the 1 year Free Tier. If not, most all the services are still free.
@@ -68,5 +70,8 @@ API Gateway is not in post 1 year free tier, but costs should be pennies.
 It should be impossible to spend more than the cost cup of coffee these 2 days.
 
 ---
-# We will start Presentations at 9:30am.
-Thanks!
+## 
+==
+## We will start Presentations at 9:30am.
+==
+## https://github.com/jasonbarbee/TekLinksCodeCamp-Jan-2017 

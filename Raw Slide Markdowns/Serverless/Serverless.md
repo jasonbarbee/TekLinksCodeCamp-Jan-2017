@@ -13,7 +13,7 @@ CCIE #18039
 Agenda
 ==
 
-1. Evolution of a Platform
+1. Evolution of Computing
 1. Consumable Platforms today
 1. Function as a Service
 1. Lab Outline
@@ -67,7 +67,6 @@ Agenda
 
 1. Evolution of a Platform
 1. **Consumable Platforms today**
-1. Bot Revolution
 1. Function as a Service
 1. Lab Outline
 
@@ -97,25 +96,8 @@ Agenda
 
 1. Evolution of a Platform
 1. Consumable Platforms today
-1. **Bot Revolution**
 1. Function as a Service
 1. Lab Outline
-
-
----
-# Bots the new User interface
-Why would I want to talk to a bot?
-We all hate calling and navigating IVRs.
-
----
-# Bot Platforms
-
-* Gupshup.com
-* Recast.ai
-* wit.ai
-* Flint Framework for Node
-* Microsoft Bot Framework
-* Serverless Bots with URL Web Hooks and Actions
 
 ---
 Agenda
@@ -123,7 +105,6 @@ Agenda
 
 1. Evolution of a Platform
 1. Consumable Platforms today
-1. Bot Revolution
 1. **Function as a Service**
 1. Lab Outline
 
@@ -176,21 +157,21 @@ http://spark.cisco.com
 ### Let's start with SQL and compare to NoSQL
 ```sql
 INSERT INTO book (
-  `ISBN`, `title`, `author`
+  `hostname`, `ip`, `version`
 )
 VALUES (
-  '9780992461256', 
-  'Mastering Windows NT 4.0', 
-  'John Smith'
+  'Birmingham-Router', 
+  '1.1.1.1', 
+  '12.2'
 );
 ```
 ---
 # DynamoDB - NoSQL Example
 ```javascript
 db.book.insert({
-  ISBN: "9780992461256",
-  title: "Full Stack JavaScript",
-  author: "Colin Ihrig & Adam Bretz"
+  hostname: "Birmingham-Router",
+  ip: "1.1.1.1",
+  version: "12.2"
 });
 ```
 
@@ -210,11 +191,6 @@ module['exports'] = function helloWorld (hook) {
   hook.res.end("Hello world!"');
 };
 ```
-
----
-# Make a API Gateway example
-Login to AWS Console
-Go to API Gateway. Click Getting Started. You'll get the default PetStore API.
 
 ---
 # Example API Gateway
@@ -251,6 +227,7 @@ Basically there's a lot of stuff to wire together, and a lot of clicks.
 ^ There's a lot of magic here.
 # Serverless magic
 * Cloudformation to build your environment - API, Lambda, Storage, Databases.
+* From Serverless.yml Resource file.
 * API Versioning 
 * Staging to Production
 

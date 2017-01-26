@@ -63,10 +63,8 @@ Traditional Networking **CANNOT** keep up with the pace of today's technology.
 ---
 
 # Network Automation is the future
-### It's OK to use telnet/ssh tooling while we cross that bridge[^1].
+### It's OK to use telnet/ssh tooling while we cross that bridge.
 ![inline 60%](images/bridge.jpg)
-
-[^1]: But sometimes feels like this!
 
 ---
 Agenda
@@ -79,13 +77,14 @@ Agenda
 1. Using Ansible
 
 ---
-# Ansible Intro
+# Ansible
 
-- Automate all the 'things'
-- Open Source project. Free.
-- Red Hat backed - "Ansible Tower" - Commercial addon for Ansible.
-<br>
-![inline 50%](https://projectme10.files.wordpress.com/2015/11/ansible-1.png)
+* Automate all the 'things'
+* Open Source project. Free.
+* Red Hat backed - "Ansible Tower" - Commercial addon for Ansible.
+
+![inline 40%](https://projectme10.files.wordpress.com/2015/11/ansible-1.png)
+==
 
 ### "SOLVE IT. AUTOMATE IT. SHARE IT."
 
@@ -104,15 +103,23 @@ Modules for every major networking manufacturer.
 -- Ansible.com
 
 ---
-# Even Cisco is in this game
-> "The work the Ansible team is doing… is something the entire industry should be paying attention to."
---Lew Tucker, VP & CTO, Cloud Computing, Cisco
-
----
 # What about Chef/Puppet/other tool?
 
 Ansible is agent-less.
 Many other tools require a bootstrap agent on the destination machine.
+
+---
+# Discovering Ansible
+
+---
+Agenda
+==
+
+1. APIs and CLIs
+1. Ansible Intro
+1. **Use Cases**
+1. Installing Ansible
+1. Using Ansible
 
 
 ---
@@ -139,15 +146,6 @@ Many other tools require a bootstrap agent on the destination machine.
 	1. 	Deeper testing
 4. Inventory data of all your servers
 
----
-Agenda
-==
-
-1. APIs and CLIs
-1. Ansible Intro
-1. **Use Cases**
-1. Installing Ansible
-1. Using Ansible
 
 ---
 
@@ -295,7 +293,7 @@ fruits:
 
 ```yaml
 [routers]
-192.168.1.1
+192.168.1.1 (site=Birmingham)
 ```
 ---
 # Inventory - Group Variables
@@ -383,10 +381,13 @@ Can have
 example
 
 ```YAML
-- hosts: routers
+- hosts: SSHRouters
   roles:
      - common
      - SSHOnly
+```
+
+```YAML
 - hosts: oldrouters
   roles:
      - common
@@ -489,7 +490,6 @@ Will pull from subfolders to build tasks
 # Review
 * Our demos today are around CLI devices, and Vagrant.
 * Ansible is much more, and has 750+ modules. It will automate anything.
-* It is possible to live the Automated lifestyle now.
 
 ---
 # Ideas Beyond the Cisco World
@@ -611,9 +611,9 @@ VRF info: (vrf in name/id, vrf out name/id)
   - Security remediation or other bulk changes 
   - Network Inventory/Audit tasks
   - Bulk Command output or Testing
-- Actively Seek billable work where you can add value doing automation.
+- **Actively Seek billable work where you can add value doing automation.**
   * Engage myself or Jeremy in a project to help, or just have us run the project.
-- Don't settle for a copy paste lifestyle. Automate it.
+- Don't settle for a copy paste lifestyle. Automate all the things.
 
 ---
 <br>

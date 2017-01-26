@@ -167,7 +167,12 @@ ADMINCELL=
 TROPOTOKEN=
 ```
 
-If you modified any of this right now, do a "serverless deploy" to deploy all this to the cloud.
+---
+# Disable Resources Section
+Disable the section of the DynamoDB creation using # signs.
+You do not want to "provision" DynamoDB again.
+
+run serverless deploy again
 
 ---
 # AWS Infrastructure Layout
